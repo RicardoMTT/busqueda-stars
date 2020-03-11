@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "busqueda"
+  "defaultProject": "busqueda",
+  "cli": {
+    "analytics": false
+  }
 }
