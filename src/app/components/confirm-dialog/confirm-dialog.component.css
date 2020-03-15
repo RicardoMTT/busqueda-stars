@@ -1,0 +1,13 @@
+img{
+    width: 300px;
+    height: 300px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.btn{
+    margin-left: 100px;
+}
+button{
+    text-align: center;
+}

@@ -1,0 +1,16 @@
+<div *ngIf="starArr.length != 0">
+
+    <div *ngFor="let star of starArr" class="container">
+        <img src="https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg">
+        <div>
+            {{ star.nombre | uppercase }}
+            {{ star.apellido | uppercase }} 
+        </div>
+    </div>
+</div>
+
+<div *ngIf="starArr.length === 0">
+    <label style="color: red;">
+        No hay resultados con el termino {{ termino }}
+    </label>
+</div>
