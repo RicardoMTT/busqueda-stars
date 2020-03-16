@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-
 import { stars } from '../mock/stars';
+import { StarsStore } from '../core/stores/stars/stars.store';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StarService {
   starsSix: any[] = [];
-  stars: any[] = stars;
+  stars: any[] = [];
 
-  constructor() {}
+  constructor(private store:StarsStore) {
+    this.stars = stars;
+  }
 
   public getStars(inicio) {
     this.starsSix = [];
@@ -67,5 +69,9 @@ export class StarService {
       result: totalList.slice(pageIndexStart, pageIndexEnd),
       hasReachedLimit: pageIndexEnd >= totalList.length - 1
     };
+  }
+  
+  loadStars(){
+    this.store.set(this.stars);
   }
 }

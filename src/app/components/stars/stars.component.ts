@@ -8,6 +8,8 @@ import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { starsListAnimation } from './stars-list.animation';
 
+import { StarsQuery } from '../../core/stores/stars/stars.query';
+
 @Component({
   selector: 'app-stars',
   templateUrl: './stars.component.html',
@@ -25,13 +27,13 @@ export class StarsComponent implements OnInit {
   constructor(
     private svcStar: StarService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private starQuery:StarsQuery,
   ) {}
 
   ngOnInit(): void {
-    
-    // this.stars = this.svcStar.getStars(this.inicio);
     this.getPageAndConcatToCurrentList(this.currentPage);
+   
     this.searchFC.valueChanges.pipe(debounceTime(1200)).subscribe(val => {
       //this.buscarStar();      
       this.stars = [];
@@ -88,11 +90,7 @@ export class StarsComponent implements OnInit {
   hasReachedLimit = false;
   getPageAndConcatToCurrentList(page: number) {
     const pageResult = this.svcStar.getPageUniverisdad(page, this.pageSize,this.searchFCU.value);
-    console.log('PAGE',pageResult);
-    
-    this.stars = this.stars.concat(pageResult.result);
-    console.log('stars',this.stars);
-    
+    this.stars = this.stars.concat(pageResult.result);    
     this.hasReachedLimit = pageResult.hasReachedLimit;
     this.currentPage = page;
   }
