@@ -27,12 +27,10 @@ export class StarsComponent implements OnInit {
  
   ngOnInit(): void {
     this.stars = this.svcStar.getStars(this.inicio);
-    console.log(this.lleno);
     this.searchFC.valueChanges
     .pipe(debounceTime(1200))
     .subscribe((val)=>{
       console.log('VALORRRR',val);
-      
       this.buscarStar();
     })
     
@@ -50,11 +48,10 @@ export class StarsComponent implements OnInit {
 */
   verMas(){
     this.inicio = this.inicio + 1;
-    if(this.inicio ==1){
+    if(this.inicio==1){
       this.stars = this.svcStar.getStars(this.inicio);
       this.lleno = true;
     }
-    
   }
   openDialog(i){
     console.log('index',i);

@@ -19,12 +19,12 @@ export class StarService {
   
       },
       {
-        nombre:"Josue",
+        nombre:"josue",
         apellido:"Estada",
         image:"https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg"
       },
       {
-        nombre:"Airton",
+        nombre:"airton",
         apellido:"Gomez",
         image:"https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg"
   
@@ -35,7 +35,7 @@ export class StarService {
         image:"https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg"
       },
       {
-        nombre:"Manuel",
+        nombre:"manuel",
         apellido:"Garcia",
         image:"https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg"
   
@@ -46,7 +46,7 @@ export class StarService {
         image:"https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg"
       },
       {
-        nombre:"Edson",
+        nombre:"edson",
         apellido:"Tapia",
         image:"https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg"
   
@@ -64,7 +64,7 @@ export class StarService {
       },
     
       {
-        nombre:"Andre",
+        nombre:"andre",
         apellido:"Gomezr",
         image:"https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg"
       },
@@ -92,13 +92,10 @@ export class StarService {
 
   public getStars(inicio){
     this.starsSix = [];
-    console.log('inicio',);
     let inicio1 = inicio + 1 ;
     for(let i=0 ; i<inicio1*6; i++){
       if(this.starss[i] === undefined){
-         
         return [];
-
       }
       this.starsSix.push(this.starss[i]);
     }

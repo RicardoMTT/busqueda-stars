@@ -1,24 +1,29 @@
-  <h1>Nuestras estrellas</h1>
+  <h1 class="animated fadeInUp">Nuestras estrellas</h1>
 
 <div class="form-inline my-2 my-lg-0">
   <input class="form-control mr-sm-2" type="text" placeholder="Buscar Star"
   [formControl]="searchFC">
 </div>
 
-<div class="centered">
+<div *ngIf="stars.length <= 0 else Stars">
+    cargando....
+</div>
+<ng-template #Stars>
+  <div class="centered" #noStars>
     <section class="cards">
-      <article class="card" *ngFor="let star of stars;let i=index">
+      <article class="card animated fadeInLeft  " *ngFor="let star of stars;let i=index">
         <img src="https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg" 
         (click)="openDialog(i)" alt="">
-         <p>{{ star.nombre | uppercase}}</p>
+        <p>{{ star.nombre | uppercase}}</p>
       </article>  
   </section>
     <div class="contenido"> 
-      <div *ngIf="!lleno">
+      <div *ngIf="!lleno else vacio">
         <button (click)="verMas()" style="background: rgb(101, 243, 101);">Ver mas xd</button>
       </div>
-      <div *ngIf="lleno">
-        <button (click)="verMas()" style="background: #FA5E3D;" [disabled]="lleno">Ver mas</button>
-      </div>
+      <ng-template #vacio>
+        <button (click)="verMas()" style="background: rgb(247, 176, 162);" [disabled]="lleno">Ver mas</button>
+      </ng-template>
     </div>
   </div>
+</ng-template>
