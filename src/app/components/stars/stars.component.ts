@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StarService } from 'src/app/services/star.service';
+import { StarService } from '../../services/star.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -32,6 +32,9 @@ export class StarsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.svcStar.loadStars();
+    this.stars =  this.starQuery.getStars();//Usando Query para sacar data del Store
+  
     this.getPageAndConcatToCurrentList(this.currentPage);
    
     this.searchFC.valueChanges.pipe(debounceTime(1200)).subscribe(val => {

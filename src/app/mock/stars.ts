@@ -1,7 +1,7 @@
 export const stars = [
   {
     id: Math.random(),
-    nombre: 'daniel',
+    nombre: 'daniel', 
     apellido: 'Gomez',
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',

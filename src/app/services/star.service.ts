@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { stars } from '../mock/stars';
 import { StarsStore } from '../core/stores/stars/stars.store';
+import { Star } from '../core/stores/stars/stars.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StarService {
   starsSix: any[] = [];
-  stars: any[] = [];
+  stars: Star[] = [];
 
   constructor(private store:StarsStore) {
     this.stars = stars;
+    console.log(this.stars);
+    
   }
 
   public getStars(inicio) {
