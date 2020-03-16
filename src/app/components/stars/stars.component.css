@@ -11,7 +11,11 @@
   width: 50%; 
   margin-bottom: 10px;
 }
-
+.buscador-universidad{
+  display: flex;
+  position: relative;
+  margin-bottom: 10px;
+}
 .icon-search{
   position: absolute;
   height: 40px;
@@ -20,6 +24,7 @@
   transform: translateY(-50%);
   left: 10px;
 }
+
 
 .inputClass{
   text-align: center;
@@ -42,15 +47,12 @@
   padding:20px 20px;
 }
 .card {
-  border: solid 1px black;
   text-align: center;
   width: 30%;
-  border-style: groove;
   margin: 10px;
 }
 
 img {
-  width: 100%;
   height: auto;
   cursor: pointer;
 }
@@ -128,7 +130,9 @@ input {
   }
   .titulo{
     width: 100%;
-    text-align: center;  }
+    text-align: center;  
+    margin-bottom: 10px;
+  }
   .buscador{
     width: 100%;
   }
@@ -140,7 +144,7 @@ input {
 
 @media only screen and (min-width: 650px) {
   .card {
-    width: 33.3%;
+    width: 30.3%;
   }
   .titulo{
     height: 80px;
@@ -155,4 +159,11 @@ input {
   .titulo{
     margin-right: 5px;
   }
+}
+
+
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }

@@ -40,6 +40,20 @@ export class StarService {
     return StarArray;
   }
 
+  getPageUniverisdad(page: number, pageSize: number,query:string='') {
+    const totalList = this.stars.filter((star)=>{
+      
+      return star.universidad.includes(query);
+    });
+    console.log(totalList);
+    
+    const pageIndexStart = (page - 1) * pageSize;
+    const pageIndexEnd = pageIndexStart + pageSize;
+    return {
+      result: totalList.slice(pageIndexStart, pageIndexEnd),
+      hasReachedLimit: pageIndexEnd >= totalList.length - 1
+    };
+  }
   getPage(page: number, pageSize: number,query:string='') {
     const totalList = this.stars.filter((star)=>{
       

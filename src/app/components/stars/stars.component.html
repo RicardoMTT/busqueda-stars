@@ -3,15 +3,49 @@
     <h1 class="animated fadeInUp">Nuestras estrellas</h1>
   </div>
   <div class="buscador">
-    <img src="../../../assets/search.png" class="icon-search" alt="">
+    <img src="../../../assets/search.png" class="icon-search" alt="logo">
     <input class="form-control" class="inputClass" type="text" placeholder="Buscar Estrella" [formControl]="searchFC">
   </div>
+</div>
 
+<div class="buscador-universidad">
+  <img src="../../../assets/search.png" class="icon-search" alt="logo">
+  <input type="text" class="inputClass" placeholder="Buscar Universidad" [formControl]="searchFCU">
 </div>
 
 <div *ngIf="stars.length <= 0 else Stars">
   No hay estreshas
 </div>
+
+
+<ng-template #Stars>
+  <div class="centered" #noStars>
+    <section class="cards" [@starsList]="stars.length">
+      <mat-card class="card"  *ngFor="let star of stars;let i=index">
+        <mat-card-header>
+          <div mat-card-avatar class="radius" class="example-header-image">
+            <div class="contenido">{{ star.ranking  }}</div>
+          </div>
+          <mat-card-title>{{ star.nombre }} {{ star.apellido}}</mat-card-title>
+          <mat-card-subtitle>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ut hic? Voluptate voluptates veniam alias, magnam sequi soluta iusto doloremque.</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image (click)="openDialog(i)" [src]="star.image" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <h2>Universidad</h2>
+          <p>
+            {{ star.universidad }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </section>
+    <div class="contenido">
+      <button (click)="showNextPage()" [ngStyle]="buttonStyle()" [disabled]="hasReachedLimit">Ver mas xd</button>
+    </div>
+</div>
+</ng-template>
+
+
+<!--
 <ng-template #Stars>
   <div class="centered" #noStars>
     <section class="cards" [@starsList]="stars.length">
@@ -19,6 +53,7 @@
         <img src="https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg"
           (click)="openDialog(i)" alt="">
         <p>{{ star.nombre | uppercase}}</p>
+        <p>{{ star.universidad }}</p>
       </article>
     </section>
     <div class="contenido">
@@ -26,3 +61,4 @@
     </div>
   </div>
 </ng-template>
+-->

@@ -14,6 +14,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     FooterComponent
   ],
   imports: [
-    BrowserModule,APP_ROUTING,CommonModule,ReactiveFormsModule, BrowserAnimationsModule,MatDialogModule
+    BrowserModule,APP_ROUTING,CommonModule,ReactiveFormsModule, BrowserAnimationsModule,MatDialogModule,MatCardModule
   ],
   entryComponents:[ConfirmDialogComponent],
   providers: [],

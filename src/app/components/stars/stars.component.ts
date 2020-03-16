@@ -20,6 +20,7 @@ export class StarsComponent implements OnInit {
   lleno: boolean = false;
 
   searchFC = new FormControl('');
+  searchFCU = new FormControl('');
 
   constructor(
     private svcStar: StarService,
@@ -28,14 +29,24 @@ export class StarsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    
     // this.stars = this.svcStar.getStars(this.inicio);
     this.getPageAndConcatToCurrentList(this.currentPage);
     this.searchFC.valueChanges.pipe(debounceTime(1200)).subscribe(val => {
-      //this.buscarStar();
+      //this.buscarStar();      
+      this.stars = [];
+      this.currentPage = 1;
+      this.getPageAndConcatToCurrentListStar(this.currentPage);
+    });
+
+    this.searchFCU.valueChanges.pipe(debounceTime(1200)).subscribe(val =>{
       this.stars = [];
       this.currentPage = 1;
       this.getPageAndConcatToCurrentList(this.currentPage);
     });
+   
+    
+   
   }
 
   buscarStar() {
@@ -76,9 +87,23 @@ export class StarsComponent implements OnInit {
   pageSize = 6;
   hasReachedLimit = false;
   getPageAndConcatToCurrentList(page: number) {
-    const pageResult = this.svcStar.getPage(page, this.pageSize,this.searchFC.value);
-    console.log(page);
+    const pageResult = this.svcStar.getPageUniverisdad(page, this.pageSize,this.searchFCU.value);
+    console.log('PAGE',pageResult);
+    
     this.stars = this.stars.concat(pageResult.result);
+    console.log('stars',this.stars);
+    
+    this.hasReachedLimit = pageResult.hasReachedLimit;
+    this.currentPage = page;
+  }
+
+  getPageAndConcatToCurrentListStar(page: number) {
+    const pageResult = this.svcStar.getPage(page, this.pageSize,this.searchFC.value);
+    console.log('PAGE',pageResult);
+    
+    this.stars = this.stars.concat(pageResult.result);
+    console.log('stars',this.stars);
+    
     this.hasReachedLimit = pageResult.hasReachedLimit;
     this.currentPage = page;
   }
