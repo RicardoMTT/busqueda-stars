@@ -15,15 +15,11 @@ body {
 a {
   text-decoration: none;
 }
-header {
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
+.header-container {
+  width: 100%;
   display: flex;
-  background: white;
-  justify-content: center;
-  align-items: center;
+  justify-content:space-around;
+  align-items:center;
   padding: 30px 80px;
 }
 .logo {
@@ -42,11 +38,6 @@ header {
 .nav-area li a:hover {
   color: #303ed3;
 }
-
-img {
-  height: 80px;
-}
-
 input {
   width: 100%;
   padding: 12px 20px;
@@ -58,3 +49,11 @@ input::-webkit-input-placeholder {
   text-align: center;
   font-size: 20px;
 }
+
+
+@media only screen and(max-width:500px ){
+  .header-container{
+    background: red;
+  }
+}
+

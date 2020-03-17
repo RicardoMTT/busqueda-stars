@@ -1,7 +1,11 @@
-<h1 class="animated fadeInUp">Nuestras estrellas</h1>
+<div class="container-titulo">
+  <div class="titulo">
+    <h1 class="animated fadeInUp">Nuestras estrellas</h1>
+  </div>
+  <div class="buscador">
+    <input class="form-control" type="text" placeholder="Buscar Estrella" [formControl]="searchFC">
+  </div>
 
-<div class="form-inline">
-  <input class="form-control" type="text" placeholder="Buscar Star" [formControl]="searchFC">
 </div>
 
 <div *ngIf="stars.length <= 0 else Stars">

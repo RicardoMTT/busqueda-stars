@@ -32,7 +32,6 @@ export class StarsComponent implements OnInit {
     // this.stars = this.svcStar.getStars(this.inicio);
     this.getPageAndConcatToCurrentList(this.currentPage);
     this.searchFC.valueChanges.pipe(debounceTime(1200)).subscribe(val => {
-      console.log('VALORRRR', val);
       this.buscarStar();
     });
   }

@@ -4,25 +4,32 @@
   justify-content: space-around;
 }
 
-.titulo {
-  background: #f2f2f2;
+.buscador{
+  width: 50%; 
+  margin-bottom: 10px;
 }
 
-h1 {
-  height: 60px;
+.container-titulo{
+  display: flex;
+  flex-direction: row;
+}
+ 
+
+.titulo {
+  width: 50%;
+  height: 80px;
   background: rgb(71, 71, 70);
   color: #fff;
-  text-align: center;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 45px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding:20px 20px;
 }
 .card {
   border: solid 1px black;
   text-align: center;
-  width: 100%;
+  width: 30%;
   border-style: groove;
+  margin: 10px;
 }
 
 img {
@@ -44,6 +51,7 @@ button {
 }
 
 .contenido {
+  margin-top: 10px;
   width: 100%;
 }
 button {
@@ -53,18 +61,15 @@ button {
   display: flex;
   justify-content: center;
 }
-
 /*INPUT*/
 input {
   width: 100%;
-  padding: 12px 20px;
+  height: 80px;
   text-align: center;
 }
 
 input::-webkit-input-placeholder {
   text-align: center;
-
-  font-size: 20px;
 }
 
 /*ANIMACIONES*/
@@ -105,15 +110,29 @@ input::-webkit-input-placeholder {
   }
 }
 
-@media only screen and (min-width: 500px) {
+@media only screen and (max-width: 500px) {
+  .container-titulo{
+    flex-direction: column;
+  }
+  .titulo{
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  .buscador{
+    width: 100%;
+  }
   .card {
     width: 50%;
   }
+
 }
 
 @media only screen and (min-width: 650px) {
   .card {
     width: 33.3%;
+  }
+  .titulo{
+    height: 80px;
   }
 }
 
@@ -121,5 +140,8 @@ input::-webkit-input-placeholder {
   .card {
     max-width: 300px;
     width: 25%;
+  }
+  .titulo{
+    margin-right: 5px;
   }
 }
