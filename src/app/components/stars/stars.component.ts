@@ -32,11 +32,13 @@ export class StarsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.svcStar.loadStars();
-    this.stars =  this.starQuery.getStars();//Usando Query para sacar data del Store
-  
-    this.getPageAndConcatToCurrentList(this.currentPage);
-   
+    
+    
+   // this.svcStar.loadStars();
+  // this.stars =  this.starQuery.getStars();//Usando Query para sacar data del Store    
+
+    this.getPageAndConcatToCurrentListStar(this.currentPage);
+   //debounceTime:solicitará API solo después de un intervalo de tiempo específico.
     this.searchFC.valueChanges.pipe(debounceTime(1200)).subscribe(val => {
       //this.buscarStar();      
       this.stars = [];
@@ -92,18 +94,21 @@ export class StarsComponent implements OnInit {
   pageSize = 6;
   hasReachedLimit = false;
   getPageAndConcatToCurrentList(page: number) {
+    this.stars = [];
     const pageResult = this.svcStar.getPageUniverisdad(page, this.pageSize,this.searchFCU.value);
-    this.stars = this.stars.concat(pageResult.result);    
+    this.stars = this.stars.concat(pageResult.result);
+        
     this.hasReachedLimit = pageResult.hasReachedLimit;
     this.currentPage = page;
   }
 
-  getPageAndConcatToCurrentListStar(page: number) {
-    const pageResult = this.svcStar.getPage(page, this.pageSize,this.searchFC.value);
-    console.log('PAGE',pageResult);
+  getPageAndConcatToCurrentListStar(page: number) { 
+    const pageResult = this.svcStar.getPage(page, this.pageSize,this.searchFC.value);    
+    console.log('INICIO',pageResult);
     
     this.stars = this.stars.concat(pageResult.result);
-    console.log('stars',this.stars);
+    console.log('FIN',pageResult);
+
     
     this.hasReachedLimit = pageResult.hasReachedLimit;
     this.currentPage = page;

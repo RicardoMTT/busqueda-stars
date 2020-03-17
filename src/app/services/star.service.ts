@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { stars } from '../mock/stars';
 import { StarsStore } from '../core/stores/stars/stars.store';
 import { Star } from '../core/stores/stars/stars.model';
+import { StarsQuery } from '../core/stores/stars/stars.query';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,6 @@ export class StarService {
 
   constructor(private store:StarsStore) {
     this.stars = stars;
-    console.log(this.stars);
     
   }
 
@@ -59,17 +59,16 @@ export class StarService {
       hasReachedLimit: pageIndexEnd >= totalList.length - 1
     };
   }
+
+  //1,6, ricardo
   getPage(page: number, pageSize: number,query:string='') {
-    const totalList = this.stars.filter((star)=>{
-      
+    const totalList = this.stars.filter((star)=>{//es un objeto de la lista de stars        
       return star.nombre.includes(query);
-    });
-    console.log(totalList);
-    
-    const pageIndexStart = (page - 1) * pageSize;
-    const pageIndexEnd = pageIndexStart + pageSize;
+    });    
+    const pageIndexStart = (page - 1) * pageSize;//0
+    const pageIndexEnd = pageIndexStart + pageSize;//6
     return {
-      result: totalList.slice(pageIndexStart, pageIndexEnd),
+      result: totalList.slice(pageIndexStart, pageIndexEnd),//Los 6 elementos del arreglo
       hasReachedLimit: pageIndexEnd >= totalList.length - 1
     };
   }

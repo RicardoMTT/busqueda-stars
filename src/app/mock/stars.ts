@@ -127,7 +127,6 @@ export const stars = [
     universidad:'catolica',
     ranking:'10'
   },
-  ,
   {
     id: Math.random(),
     nombre: 'michael',
