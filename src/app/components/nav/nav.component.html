@@ -16,6 +16,7 @@
             <li><a routerLink="stars">Los 100</a></li>
         </ul>
     </nav>
-     
+
+    <img class="bars" (click)="cambiarEstado()" [ngClass]="ocultar ? 'nav-container':'mostrar'" src="../../../assets/open-menu.png" alt="bars" style="width: 20px;height: 20px;">
 </header>
 

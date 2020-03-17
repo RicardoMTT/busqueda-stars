@@ -10,6 +10,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class NavComponent implements OnInit {
 
+  ocultar:boolean = true;
   searchFC = new FormControl(null);
 
   constructor(private router:Router){}
@@ -26,6 +27,13 @@ export class NavComponent implements OnInit {
     let termino:string = this.searchFC.value;
     console.log(termino);
     this.router.navigate(['/resultado',termino]);
+  }
+
+  cambiarEstado(){
+    console.log('click');
+    this.ocultar = !this.ocultar;
+    console.log(this.ocultar);
+    
   }
 
 }

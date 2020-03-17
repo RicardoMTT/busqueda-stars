@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { starsListAnimation } from './stars-list.animation';
