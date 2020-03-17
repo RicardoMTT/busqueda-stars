@@ -124,6 +124,29 @@ input {
   }
 }
 
+
+@media only screen and(max-width:350px ){
+  .container-titulo{
+    flex-direction: column;
+  }
+  .titulo{
+    width: 100%;
+    text-align: center;  
+    margin-bottom: 10px;
+  }
+  .img-card{
+    width: 100%;
+  }
+  .buscador{
+    width: 100%;
+  }
+  .card {
+    width: 100%;
+  }
+
+}
+
+
 @media only screen and (max-width: 650px) {
   .container-titulo{
     flex-direction: column;
@@ -139,17 +162,27 @@ input {
   .card {
     width: 50%;
   }
-
 }
+
 
 @media only screen and (min-width: 650px) {
-  .card {
-    width: 30.3%;
+  .container-titulo{
+    flex-direction: column;
   }
   .titulo{
-    height: 80px;
+    width: 100%;
+    text-align: center;  
+    margin-bottom: 10px;
+  }
+  .buscador{
+    width: 100%;
+  }
+  .card {
+    width: 50%;
   }
 }
+
+
 
 @media only screen and (min-width: 920px) {
   .card {

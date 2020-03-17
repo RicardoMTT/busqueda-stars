@@ -22,6 +22,15 @@ p {
   }
 
 }
+@media only screen and(max-width:350px ){
+  .footer-container{
+    flex-direction: column;
+  }
+  .col1,.col2,.col3{
+    width: 100%;  
+  }
+
+}
 @media only screen and (max-width: 600px) {
   .footer-container{
     flex-direction: column;

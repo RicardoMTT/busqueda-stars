@@ -115,7 +115,7 @@ export class StarsComponent implements OnInit {
   }
 
   showNextPage() {
-    this.getPageAndConcatToCurrentList(this.currentPage + 1);
+    this.getPageAndConcatToCurrentListStar(this.currentPage + 1);
   }
 
   buttonStyle() {

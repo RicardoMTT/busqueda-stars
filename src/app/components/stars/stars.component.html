@@ -50,7 +50,7 @@
   <div class="centered" #noStars>
     <section class="cards" [@starsList]="stars.length">
       <article class="card" *ngFor="let star of stars;let i=index">
-        <img src="https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg"
+        <img class="img-card" src="https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg"
           (click)="openDialog(i)" alt="">
         <p>{{ star.nombre | uppercase}}</p>
         <p>{{ star.universidad }}</p>
