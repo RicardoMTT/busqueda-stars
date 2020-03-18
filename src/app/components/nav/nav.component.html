@@ -1,22 +1,14 @@
 <header class="header-container">
-    
     <div class="imagen-container">
-        <img src="http://certificatecapm.com/wp-content/uploads/2020/01/cropped-CAPMNOWAcademia-160x180.png"
-         alt="cargando" class="logo">
+        <img src="../../../assets/LogoResponsive.png" alt="cargando" class="logo">
     </div>
-    
-    <nav class="nav-container">
-        <ul class="nav-area">
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Programas</a></li>
-            <li><a href="#">Nosotros</a></li>
-            <li><a href="#">Testimonios</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contacto</a></li>
-            <li><a routerLink="stars">Los 100</a></li>
-        </ul>
-    </nav>
-
-    <img class="bars" (click)="cambiarEstado()" [ngClass]="ocultar ? 'nav-container':'mostrar'" src="../../../assets/open-menu.png" alt="bars" style="width: 20px;height: 20px;">
+    <!--
+    <div class="buscador-container">
+        <div class="divisor-container">
+            <img src="../../../assets/search.png" class="icon-search" alt="logo">
+            <input class="form-control" class="inputClass" type="text" placeholder="Buscar Estrella"
+                [formControl]="searchFC">
+        </div>
+    </div>
+    -->
 </header>
-

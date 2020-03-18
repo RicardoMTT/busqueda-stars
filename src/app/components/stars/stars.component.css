@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
-
+ 
 .buscador{
   display: flex;
   position: relative;
@@ -53,6 +53,7 @@
 }
 
 img {
+  width: 100%;
   height: auto;
   cursor: pointer;
 }
@@ -134,9 +135,6 @@ input {
     text-align: center;  
     margin-bottom: 10px;
   }
-  .img-card{
-    width: 100%;
-  }
   .buscador{
     width: 100%;
   }
@@ -166,19 +164,18 @@ input {
 
 
 @media only screen and (min-width: 650px) {
-  .container-titulo{
-    flex-direction: column;
-  }
+  
   .titulo{
-    width: 100%;
+    width: 50%;
     text-align: center;  
     margin-bottom: 10px;
   }
   .buscador{
-    width: 100%;
+    width: 50%;
   }
   .card {
-    width: 50%;
+    max-width: 300px;
+    width: 40%;
   }
 }
 
@@ -190,13 +187,79 @@ input {
     width: 40%;
   }
   .titulo{
+    width: 50%;
     margin-right: 5px;
+    text-align: center;  
+    margin-bottom: 10px;
+  }
+  .buscador{
+    width: 50%;
   }
 }
 
 
 
 .example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  border-radius: 100%;
   background-size: cover;
+}
+
+.flex-university{
+  display: flex;
+}
+
+.flex-ranking{
+  display: flex;
+  justify-content: center;
+}
+
+.contenedor{
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.texto-encima{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.centrado{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.texto-debajo{
+  width: 80%;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.texto-debajo:hover{
+  background: rgb(#000,.8);
+  transform: translateY(-50px);
+  transition: all .5s;
+}
+
+.datos-star{
+  color:white;
+  opacity: 1;
+}
+
+p{
+  font-family: 'Lato', sans-serif;
+}
+
+
+.select-container{
+  display: flex;
+  width: 50%;
+}
+.select-container select{
+  width: 50%;
+  margin-left: 40px;
 }

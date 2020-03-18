@@ -15,7 +15,7 @@ export const stars = [
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
     universidad:'san marcos',
-    ranking:'33'
+    ranking:'2'
   },
   {
     id: Math.random(),
@@ -24,7 +24,7 @@ export const stars = [
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
     universidad:'san marcos',
-    ranking:'23'
+    ranking:'3'
   },
   {
     id: Math.random(),
@@ -33,7 +33,7 @@ export const stars = [
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
     universidad:'san marcos',
-    ranking:'43'
+    ranking:'4'
   },
   {
     id: Math.random(),
@@ -42,7 +42,7 @@ export const stars = [
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
       universidad:'upc',
-      ranking:'78'
+      ranking:'5'
   },
   {
     id: Math.random(),
@@ -51,7 +51,7 @@ export const stars = [
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
       universidad:'upc',
-      ranking:'99'
+      ranking:'6'
   },
   {
     id: Math.random(),
@@ -60,7 +60,7 @@ export const stars = [
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
       universidad:'upc',
-      ranking:'4'
+      ranking:'7'
   },
   {
     id: Math.random(),
@@ -69,7 +69,7 @@ export const stars = [
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
       universidad:'upc',
-      ranking:'2'
+      ranking:'8'
   },
   {
     id: Math.random(),
@@ -87,7 +87,7 @@ export const stars = [
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
     universidad:'callao',
-    ranking:'65'
+    ranking:'10'
   },
 
   {
@@ -97,7 +97,7 @@ export const stars = [
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
     universidad:'callao',
-    ranking:'54'
+    ranking:'11'
   },
   {
     id: Math.random(),
@@ -106,7 +106,7 @@ export const stars = [
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
     universidad:'callao',
-    ranking:'18'
+    ranking:'12'
   },
 
   {
@@ -116,7 +116,7 @@ export const stars = [
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
     universidad:'catolica',
-    ranking:'3'
+    ranking:'13'
   },
   {
     id: Math.random(),
@@ -125,7 +125,7 @@ export const stars = [
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
     universidad:'catolica',
-    ranking:'10'
+    ranking:'14'
   },
   {
     id: Math.random(),
@@ -133,7 +133,37 @@ export const stars = [
     apellido: 'flores',
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
-    universidad:'prueba',
-    ranking:'66'
+    universidad:'callao',
+    ranking:'15'
+  },
+  ,
+  {
+    id: Math.random(),
+    nombre: 'Calvin',
+    apellido: 'flores',
+    image:
+      'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
+    universidad:'callao',
+    ranking:'16'
+  },
+  ,
+  {
+    id: Math.random(),
+    nombre: 'Raul',
+    apellido: 'Toledo',
+    image:
+      'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
+    universidad:'callao',
+    ranking:'17'
+  },
+  ,
+  {
+    id: Math.random(),
+    nombre: 'joseph',
+    apellido: 'mendoza',
+    image:
+      'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
+    universidad:'callao',
+    ranking:'18'
   }
 ];

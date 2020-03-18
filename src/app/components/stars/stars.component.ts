@@ -4,12 +4,11 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { starsListAnimation } from './stars-list.animation';
 
-import { StarsQuery } from '../../core/stores/stars/stars.query';
-
+ 
 @Component({
   selector: 'app-stars',
   templateUrl: './stars.component.html',
@@ -21,19 +20,34 @@ export class StarsComponent implements OnInit {
   stars: any[] = [];
   lleno: boolean = false;
 
+  nrSelect = null;
+  universidades = [
+    {
+      nombre:'san marcos'
+    },
+    {
+      nombre:'callao'
+    },
+    {
+      nombre:'catolica'
+    }
+  ];
+
+  form = new FormGroup({
+    universidad: new FormControl(this.universidades[3]),
+  });
+
+  
   searchFC = new FormControl('');
   searchFCU = new FormControl('');
 
   constructor(
     private svcStar: StarService,
     private router: Router,
-    public dialog: MatDialog,
-    private starQuery:StarsQuery,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    
-    
    // this.svcStar.loadStars();
   // this.stars =  this.starQuery.getStars();//Usando Query para sacar data del Store    
 
@@ -51,9 +65,14 @@ export class StarsComponent implements OnInit {
       this.currentPage = 1;
       this.getPageAndConcatToCurrentList(this.currentPage);
     });
-   
+
     
-   
+    this.form.valueChanges.pipe().subscribe(val =>{
+      this.stars = [];
+      this.currentPage = 1;
+      this.getPageAndConcatToCurrentListSelect(this.currentPage);    
+    })
+    
   }
 
   buscarStar() {
@@ -97,19 +116,22 @@ export class StarsComponent implements OnInit {
     this.stars = [];
     const pageResult = this.svcStar.getPageUniverisdad(page, this.pageSize,this.searchFCU.value);
     this.stars = this.stars.concat(pageResult.result);
-        
     this.hasReachedLimit = pageResult.hasReachedLimit;
     this.currentPage = page;
   }
 
   getPageAndConcatToCurrentListStar(page: number) { 
-    const pageResult = this.svcStar.getPage(page, this.pageSize,this.searchFC.value);    
-    console.log('INICIO',pageResult);
+    const pageResult = this.svcStar.getPage(page, this.pageSize,this.searchFC.value);        
+    this.stars = this.stars.concat(pageResult.result);    
+    this.hasReachedLimit = pageResult.hasReachedLimit;
+    this.currentPage = page;
+  }
+ 
+  getPageAndConcatToCurrentListSelect(page: number) { 
+    console.log(this.form.value.universidad);
     
+    const pageResult = this.svcStar.getPageUniverisdad(page, this.pageSize,this.form.value.universidad);  
     this.stars = this.stars.concat(pageResult.result);
-    console.log('FIN',pageResult);
-
-    
     this.hasReachedLimit = pageResult.hasReachedLimit;
     this.currentPage = page;
   }
