@@ -14,50 +14,46 @@ export class StarService {
   stars: Star[] = [];
 
   constructor(
-      private Starstore:StarsStore,
-      private starsApi:StarsApi,
-      private starsQuery:StarsQuery) {
+    private Starstore: StarsStore,
+    private starsApi: StarsApi,
+    private starsQuery: StarsQuery
+  ) {
     this.stars = stars;
-    
   }
 
-  public loadStars(  
+  public loadStars(
     page: number,
     pageSize: number,
-    query: string | Map<string, string>,
-    resetResults: boolean){
-    this.starsApi.getSearch(page,pageSize,query);
+    query: string,
+    resetResults: boolean
+  ) {
+    this.starsApi.getSearch(page, pageSize, query);
     this.Starstore.setLoading(true);
     this.starsApi
-        .getPage(page,pageSize,query)
-        .pipe(
-          tap((result:any) => this.Starstore.upsertMany(result.data)),
-          tap(_ => this.Starstore.setLoading(false)),
-          tap(
-            result =>{
-              console.log('result',result.data);
-              
-              const pageStarsId = result.data.map(p => p.id);
-              const newPageStars = resetResults
-                ? [...pageStarsId]
-                : [
-                  ...this.starsQuery.getStarsList().pageIds,
-                  ...pageStarsId
-                ];
-              const hasReachedLimit = result.count ===newPageStars.length;
-              this.Starstore.updateList({
-                currentPage:page,
-                pageSize,
-                hasReachedLimit,
-                pageIds:newPageStars
-              });
-            }
-          )
-        ).subscribe();
-        
+      .getPage(page, pageSize, query)
+      .pipe(
+        tap((result: any) => this.Starstore.upsertMany(result.data)),
+        tap(_ => this.Starstore.setLoading(false)),
+        tap(result => {
+          console.log('result', result.data);
+
+          const pageStarsId = result.data.map(p => p.id);
+          const newPageStars = resetResults
+            ? [...pageStarsId]
+            : [...this.starsQuery.getStarsList().pageIds, ...pageStarsId];
+          const hasReachedLimit = result.count === newPageStars.length;
+          this.Starstore.updateList({
+            currentPage: page,
+            pageSize,
+            hasReachedLimit,
+            pageIds: newPageStars,
+            query
+          });
+        })
+      )
+      .subscribe();
   }
 
-  
   public getStars(inicio) {
     this.starsSix = [];
     let inicio1 = inicio + 1;
@@ -87,9 +83,8 @@ export class StarService {
     return StarArray;
   }
 
-  getPageUniverisdad(page: number, pageSize: number,query:string='') {
-    const totalList = this.stars.filter((star)=>{
-      
+  getPageUniverisdad(page: number, pageSize: number, query: string = '') {
+    const totalList = this.stars.filter(star => {
       return star.universidad.includes(query);
     });
     const pageIndexStart = (page - 1) * pageSize;
@@ -101,19 +96,19 @@ export class StarService {
   }
 
   //1,6, ricardo
-  getPage(page: number, pageSize: number,query:string='') {    
-    const totalList = this.stars.filter((star)=>{//es un objeto de la lista de stars  
+  getPage(page: number, pageSize: number, query: string = '') {
+    const totalList = this.stars.filter(star => {
+      //es un objeto de la lista de stars
 
       return star.nombre.includes(query);
-    });    
-    console.log('total list',totalList);
-    
-    const pageIndexStart = (page - 1) * pageSize;//0
-    const pageIndexEnd = pageIndexStart + pageSize;//6
+    });
+    console.log('total list', totalList);
+
+    const pageIndexStart = (page - 1) * pageSize; //0
+    const pageIndexEnd = pageIndexStart + pageSize; //6
     return {
-      result: totalList.slice(pageIndexStart, pageIndexEnd),//Los 6 elementos del arreglo
+      result: totalList.slice(pageIndexStart, pageIndexEnd), //Los 6 elementos del arreglo
       hasReachedLimit: pageIndexEnd >= totalList.length - 1
     };
   }
-  
 }

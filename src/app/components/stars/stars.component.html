@@ -4,24 +4,24 @@
   </div>
 </div>
 
-<div class="filtro-container" >
-  
+<div class="filtro-container">
+
   <div class="buscador-container">
     <img src="../../../assets/search.png" class="icon-search" alt="logo">
     <input class="form-control" class="inputClass" type="text" placeholder="Buscar Estrella" [formControl]="searchFC">
   </div>
-  
-  <div class="form-container"class="options">
+
+  <div class="form-container" class="options">
     <form [formGroup]="form">
       <select formControlName="universidad">
-          <option [ngValue]="null" disabled>Seleccione universidad</option>
-          <option *ngFor="let uni of universidades;let index=index"  [ngValue]="uni.nombre">
-            {{uni.nombre}}  
-          </option>
+        <option [ngValue]="null" disabled>Seleccione universidad</option>
+        <option *ngFor="let uni of universidades;let index=index" [ngValue]="uni.nombre">
+          {{uni.nombre}}
+        </option>
       </select>
     </form>
   </div>
-  
+
 </div>
 
 
@@ -32,37 +32,43 @@
 <ng-template #Stars>
   <div class="centered" #noStars>
     <section class="cards" [@starsList]="stars.length">
-      <mat-card class="card"  *ngFor="let star of starQuery.page$|async">
+      <mat-card class="card" *ngFor="let star of starQuery.page$|async">
         <div class="contenedor">
-          <img src="../assets/adan.png" (click)="openDialog(1)"/>
+          <img src="../assets/adan.png" (click)="openDialog(1)" />
           <div class="texto-encima">
             <div>
-              <img src="../assets/star.svg" class="contenedor"   alt="">
+              <img src="../assets/star.svg" class="contenedor" alt="">
               <p style="position: relative;margin-top: -25px;left: 50%;transform: translate(-50%, -50%)">
                 {{ star.ranking }}
               </p>
             </div>
-            
+
           </div>
         </div>
         <mat-card-header>
           <div class="texto-debajo">
-            <mat-card-title><p class="datos-star" >{{ star.nombre }} {{ star.apellido}}</p></mat-card-title>
-            <mat-card-subtitle><p class="datos-star">{{ star.universidad }}</p></mat-card-subtitle>  
+            <mat-card-title>
+              <p class="datos-star">{{ star.nombre }} {{ star.apellido}}</p>
+            </mat-card-title>
+            <mat-card-subtitle>
+              <p class="datos-star">{{ star.universidad }}</p>
+            </mat-card-subtitle>
           </div>
         </mat-card-header>
-       
+
       </mat-card>
     </section>
 
     <div class="contenido" *ngIf="!esUniversidad">
-      <button (click)="showNextPage()" [ngStyle]="buttonStyle()" [disabled]="hasReachedLimit">Ver mas xd</button>
+      <button (click)="showNextPage()" [ngStyle]="buttonStyle()" [disabled]="starQuery.starsDisabledMore$ | async">Ver
+        mas xd</button>
     </div>
 
     <div class="contenido" *ngIf="esUniversidad">
-      <button (click)="showNextPageSelect()" [ngStyle]="buttonStyle()" [disabled]="hasReachedLimit">Ver mas universidades xd</button>
+      <button (click)="showNextPageSelect()" [ngStyle]="buttonStyle()"
+        [disabled]="starQuery.starsDisabledMore$ | async">Ver mas
+        universidades xd</button>
     </div>
 
-</div>
+  </div>
 </ng-template>
-

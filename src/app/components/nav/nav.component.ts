@@ -12,73 +12,63 @@ const PAG_SIZE = 6;
 })
 export class NavComponent implements OnInit {
   stars: any[] = [];
-  ocultar:boolean = true;
-  searchFC : FormControl;
-  
+  ocultar: boolean = true;
+  searchFC: FormControl;
 
-  constructor(private router:Router,
-              private svcStar:StarService,
-              private fb:FormBuilder
-              ){
-              this._buildForm();
-              this._initFormListeners();
+  constructor(
+    private router: Router,
+    private svcStar: StarService,
+    private fb: FormBuilder
+  ) {
+    this._buildForm();
+    this._initFormListeners();
   }
 
-  private _buildForm(){
+  private _buildForm() {
     this.searchFC = this.fb.control('');
   }
 
-  private _loadFirstResults(){    
-    this.svcStar.loadStars(
-      1,
-      PAG_SIZE,
-      this.searchFC.value,
-      false
-    );
-    
+  private _loadFirstResults() {
+    this.svcStar.loadStars(1, PAG_SIZE, this.searchFC.value, false);
   }
-  private _initFormListeners(){    
-    this.searchFC.valueChanges.
-      pipe(
+  private _initFormListeners() {
+    this.searchFC.valueChanges
+      .pipe(
         debounceTime(300),
         tap(val => {
-          this.svcStar.loadStars(
-            1,
-            PAG_SIZE,
-            val,
-            false
-          )
-        }
-        )
-    ).subscribe();
+          this.svcStar.loadStars(1, PAG_SIZE, val, true);
+        })
+      )
+      .subscribe();
   }
   ngOnInit(): void {
     this._loadFirstResults();
   }
 
-  
   //paged query
   currentPage = 1;
   pageSize = 6;
   hasReachedLimit = false;
-  getPageAndConcatToCurrentListStar(page: number) { 
-    const pageResult = this.svcStar.getPage(page, this.pageSize,this.searchFC.value);  
-    this.stars = this.stars.concat(pageResult.result);    
+  getPageAndConcatToCurrentListStar(page: number) {
+    const pageResult = this.svcStar.getPage(
+      page,
+      this.pageSize,
+      this.searchFC.value
+    );
+    this.stars = this.stars.concat(pageResult.result);
     this.hasReachedLimit = pageResult.hasReachedLimit;
     this.currentPage = page;
-    
   }
 
-  buscarStar(){
-    let termino:string = this.searchFC.value;
+  buscarStar() {
+    let termino: string = this.searchFC.value;
     console.log(termino);
-    this.router.navigate(['/resultado',termino]);
+    this.router.navigate(['/resultado', termino]);
   }
 
-  cambiarEstado(){
+  cambiarEstado() {
     console.log('click');
     this.ocultar = !this.ocultar;
     console.log(this.ocultar);
   }
-
 }

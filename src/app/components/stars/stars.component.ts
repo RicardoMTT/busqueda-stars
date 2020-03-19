@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StarService } from '../../services/star.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
- 
+
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
@@ -23,15 +23,14 @@ export class StarsComponent implements OnInit {
   stars: any[] = [];
   lleno: boolean = false;
 
-  esUniversidad:boolean = false;
+  esUniversidad: boolean = false;
 
-  universidades:any[] = universities;
+  universidades: any[] = universities;
 
   form = new FormGroup({
-    universidad: new FormControl(this.universidades[4]),
-  }); 
+    universidad: new FormControl(this.universidades[4])
+  });
 
-  
   searchFC = new FormControl('');
   searchFCU = new FormControl('');
 
@@ -39,37 +38,33 @@ export class StarsComponent implements OnInit {
     private svcStar: StarService,
     private router: Router,
     public dialog: MatDialog,
-    public starQuery:StarsQuery
+    public starQuery: StarsQuery
   ) {}
 
   ngOnInit(): void {
-   // this.svcStar.loadStars();
-  // this.stars =  this.starQuery.getStars();//Usando Query para sacar data del Store    
+    // this.svcStar.loadStars();
+    // this.stars =  this.starQuery.getStars();//Usando Query para sacar data del Store
 
     this.getPageAndConcatToCurrentListStar(this.currentPage);
-   //debounceTime:solicitará API solo después de un intervalo de tiempo específico.
+    //debounceTime:solicitará API solo después de un intervalo de tiempo específico.
     this.searchFC.valueChanges.pipe(debounceTime(1200)).subscribe(val => {
-      //this.buscarStar();      
+      //this.buscarStar();
       this.stars = [];
       this.currentPage = 1;
       this.getPageAndConcatToCurrentListStar(this.currentPage);
     });
 
-    this.searchFCU.valueChanges.pipe(debounceTime(1200)).subscribe(val =>{
-      
+    this.searchFCU.valueChanges.pipe(debounceTime(1200)).subscribe(val => {
       this.stars = [];
       this.currentPage = 1;
       this.getPageAndConcatToCurrentList(this.currentPage);
     });
 
-    
-    this.form.valueChanges.pipe().subscribe(val =>{
-     
+    this.form.valueChanges.pipe().subscribe(val => {
       this.stars = [];
       this.currentPage = 1;
-      this.getPageAndConcatToCurrentListSelect(this.currentPage);    
-    })
-    
+      this.getPageAndConcatToCurrentListSelect(this.currentPage);
+    });
   }
 
   buscarStar() {
@@ -111,40 +106,50 @@ export class StarsComponent implements OnInit {
   hasReachedLimit = false;
   getPageAndConcatToCurrentList(page: number) {
     this.stars = [];
-    const pageResult = this.svcStar.getPageUniverisdad(page, this.pageSize,this.searchFCU.value);
+    const pageResult = this.svcStar.getPageUniverisdad(
+      page,
+      this.pageSize,
+      this.searchFCU.value
+    );
     this.stars = this.stars.concat(pageResult.result);
     this.hasReachedLimit = pageResult.hasReachedLimit;
     this.currentPage = page;
   }
 
-  getPageAndConcatToCurrentListStar(page: number) { 
-    const pageResult = this.svcStar.getPage(page, this.pageSize,this.searchFC.value);        
-    this.stars = this.stars.concat(pageResult.result);    
+  getPageAndConcatToCurrentListStar(page: number) {
+    const pageResult = this.svcStar.getPage(
+      page,
+      this.pageSize,
+      this.searchFC.value
+    );
+    this.stars = this.stars.concat(pageResult.result);
     this.hasReachedLimit = pageResult.hasReachedLimit;
     this.currentPage = page;
   }
- 
-  getPageAndConcatToCurrentListSelect(page: number) { 
-    
-    const pageResult = this.svcStar.getPageUniverisdad(page, this.pageSize,this.form.value.universidad);  
+
+  getPageAndConcatToCurrentListSelect(page: number) {
+    const pageResult = this.svcStar.getPageUniverisdad(
+      page,
+      this.pageSize,
+      this.form.value.universidad
+    );
     this.stars = this.stars.concat(pageResult.result);
-    if(this.form.value.universidad === ''){      
+    if (this.form.value.universidad === '') {
       this.esUniversidad = false;
-    }else{
+    } else {
       this.esUniversidad = true;
     }
     this.hasReachedLimit = pageResult.hasReachedLimit;
     this.currentPage = page;
   }
 
-  
   showNextPage() {
-    console.log('STARS.componennt',this.starQuery.getStarsList().currentPage);
-    
+    console.log('STARS.componennt', this.starQuery.getStarsList().currentPage);
+
     this.svcStar.loadStars(
       this.starQuery.getStarsList().currentPage + 1,
       PAGE_SIZE,
-      this.searchFC.value,
+      this.starQuery.getStarsListUI().query,
       false // Mantener resultados anteriores
     );
   }
@@ -153,11 +158,10 @@ export class StarsComponent implements OnInit {
     this.getPageAndConcatToCurrentListStar(this.currentPage + 1);
   }
  */
-  showNextPageSelect(){
+  showNextPageSelect() {
     this.getPageAndConcatToCurrentListSelect(this.currentPage + 1);
   }
 
-  
   buttonStyle() {
     return {
       background: !this.hasReachedLimit
