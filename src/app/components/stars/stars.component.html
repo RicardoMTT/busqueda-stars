@@ -2,30 +2,28 @@
   <div class="titulo">
     <h1 class="animated fadeInUp">Nuestras estrellas</h1>
   </div>
-  <div class="buscador">
+</div>
+
+<div class="filtro-container" >
+  
+  <div class="buscador-container">
     <img src="../../../assets/search.png" class="icon-search" alt="logo">
     <input class="form-control" class="inputClass" type="text" placeholder="Buscar Estrella" [formControl]="searchFC">
   </div>
+  
+  <div class="form-container"class="options">
+    <form [formGroup]="form">
+      <select formControlName="universidad">
+          <option [ngValue]="null" disabled>Seleccione universidad</option>
+          <option *ngFor="let uni of universidades;let index=index"  [ngValue]="uni.nombre">
+            {{uni.nombre}}  
+          </option>
+      </select>
+    </form>
+  </div>
+  
 </div>
 
-<div class="select-container">
-  <form [formGroup]="form">
-    <select formControlName="universidad" [(ngModel)]='nrSelect' >
-        <option [ngValue]="null" disabled>Seleccione</option>
-        <option *ngFor="let uni of universidades;let index=index"  [ngValue]="uni.nombre">
-          {{uni.nombre}}  
-        </option>
-    </select>
-  </form>
-  <p>Form value: {{ form.value | json }}</p> 
-</div>
-
-
- 
-<div class="buscador-universidad">
-  <img src="../../../assets/search.png" class="icon-search" alt="logo">
-  <input type="text" class="inputClass" placeholder="Buscar Universidad" [formControl]="searchFCU">
-</div>
 
 <div *ngIf="stars.length <= 0 else Stars">
   No hay estreshas
@@ -34,12 +32,12 @@
 <ng-template #Stars>
   <div class="centered" #noStars>
     <section class="cards" [@starsList]="stars.length">
-      <mat-card class="card"  *ngFor="let star of stars;let i=index">
+      <mat-card class="card"  *ngFor="let star of starQuery.page$|async">
         <div class="contenedor">
-          <img src="../assets/adan.png" />
+          <img src="../assets/adan.png" (click)="openDialog(1)"/>
           <div class="texto-encima">
             <div>
-              <img src="../assets/star.svg" class="contenedor" alt="">
+              <img src="../assets/star.svg" class="contenedor"   alt="">
               <p style="position: relative;margin-top: -25px;left: 50%;transform: translate(-50%, -50%)">
                 {{ star.ranking }}
               </p>
@@ -48,47 +46,23 @@
           </div>
         </div>
         <mat-card-header>
-         <div></div>
-         <div class="texto-debajo">
-          <mat-card-title><p class="datos-star" >{{ star.nombre }} {{ star.apellido}}</p></mat-card-title>
-          <mat-card-subtitle><p class="datos-star">{{ star.universidad }}</p></mat-card-subtitle>  
-        </div>
-        <div></div>
-         </mat-card-header>
+          <div class="texto-debajo">
+            <mat-card-title><p class="datos-star" >{{ star.nombre }} {{ star.apellido}}</p></mat-card-title>
+            <mat-card-subtitle><p class="datos-star">{{ star.universidad }}</p></mat-card-subtitle>  
+          </div>
+        </mat-card-header>
        
       </mat-card>
     </section>
-    <div class="contenido">
+
+    <div class="contenido" *ngIf="!esUniversidad">
       <button (click)="showNextPage()" [ngStyle]="buttonStyle()" [disabled]="hasReachedLimit">Ver mas xd</button>
     </div>
+
+    <div class="contenido" *ngIf="esUniversidad">
+      <button (click)="showNextPageSelect()" [ngStyle]="buttonStyle()" [disabled]="hasReachedLimit">Ver mas universidades xd</button>
+    </div>
+
 </div>
 </ng-template>
 
-
-<!--
-
-<ng-template #Stars>
-  <div class="centered" #noStars>
-    <section class="cards" [@starsList]="stars.length">
-      <article class="card" *ngFor="let star of stars;let i=index">
-        <img class="img-card" src="https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg"
-          (click)="openDialog(i)" alt="">
-          <div class="flex-university">
-            <img src="../../../assets//university.png" alt="universidad" style="margin-right: 30px;width: 30px;height: 30px;">
-            <p>{{ star.universidad | uppercase}}</p>
-          </div>
-          <div class="flex-university">
-            <img src="../../../assets//man.png" alt="universidad" style="margin-right: 30px;width: 30px;height: 30px;">
-            <p>{{ star.nombre | uppercase }}</p>
-          </div>
-        <div class="flex-ranking">
-          <p style="border-radius: 100%; background: black;color: white; width: 30px;height: 30px; text-align: center;">{{ star.ranking }}</p>
-        </div>
-      </article>
-    </section>
-    <div class="contenido">
-      <button (click)="showNextPage()" [ngStyle]="buttonStyle()" [disabled]="hasReachedLimit">Ver mas xd</button>
-    </div>
-  </div>
-</ng-template>
--->

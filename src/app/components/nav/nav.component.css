@@ -12,72 +12,28 @@ body {
   font-weight: 600;
   font-size: 16px;
 }
-a {
-  text-decoration: none;
-}
 .header-container {
   width: 100%;
   display: flex;
-  justify-content:space-around;
-  align-items:center;
   padding: 30px 80px;
 }
 .logo {
+  width: auto;
   margin-right: auto;
 }
 
-input {
+
+.imagen-container{
+  text-align: center;
   width: 100%;
-  padding: 12px 20px;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-.bars{
-  display: none;
-}
-input::-webkit-input-placeholder {
-  text-align: center;
-  font-size: 12px;
 }
 
 
-@media only screen and (max-width:500px ){
+
+@media only screen and(max-width:350px ){
   .header-container{
     flex-direction: column;
-  }
-  .nav-container ul li{
-    text-align: center;
     width: 100%;
   }
 
-  .bars{
-    display: block;
-  }
-  .nav-container{
-    display: none;
-  }
-}
-.divisor-container{
-  display: flex;
-  width: 50%;
-}
-.buscador-container{
-  display: flex;
-  position: relative;
-  width: 50%; 
-  margin-bottom: 10px;
-}
-
-.icon-search{
-  position: absolute;
-  height: 40px;
-  width: auto;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 10px;
-}
-
-.imagen-container{
-  width: 50%;
 }

@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { StarService } from '../../services/star.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-
+ 
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { starsListAnimation } from './stars-list.animation';
 
- 
+import { universities } from '../../mock/universities';
+import { StarsQuery } from 'src/app/core/stores/stars/stars.query';
+const PAGE_SIZE = 6;
+
 @Component({
   selector: 'app-stars',
   templateUrl: './stars.component.html',
@@ -20,22 +23,13 @@ export class StarsComponent implements OnInit {
   stars: any[] = [];
   lleno: boolean = false;
 
-  nrSelect = null;
-  universidades = [
-    {
-      nombre:'san marcos'
-    },
-    {
-      nombre:'callao'
-    },
-    {
-      nombre:'catolica'
-    }
-  ];
+  esUniversidad:boolean = false;
+
+  universidades:any[] = universities;
 
   form = new FormGroup({
-    universidad: new FormControl(this.universidades[3]),
-  });
+    universidad: new FormControl(this.universidades[4]),
+  }); 
 
   
   searchFC = new FormControl('');
@@ -44,7 +38,8 @@ export class StarsComponent implements OnInit {
   constructor(
     private svcStar: StarService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public starQuery:StarsQuery
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +56,7 @@ export class StarsComponent implements OnInit {
     });
 
     this.searchFCU.valueChanges.pipe(debounceTime(1200)).subscribe(val =>{
+      
       this.stars = [];
       this.currentPage = 1;
       this.getPageAndConcatToCurrentList(this.currentPage);
@@ -68,6 +64,7 @@ export class StarsComponent implements OnInit {
 
     
     this.form.valueChanges.pipe().subscribe(val =>{
+     
       this.stars = [];
       this.currentPage = 1;
       this.getPageAndConcatToCurrentListSelect(this.currentPage);    
@@ -128,18 +125,39 @@ export class StarsComponent implements OnInit {
   }
  
   getPageAndConcatToCurrentListSelect(page: number) { 
-    console.log(this.form.value.universidad);
     
     const pageResult = this.svcStar.getPageUniverisdad(page, this.pageSize,this.form.value.universidad);  
     this.stars = this.stars.concat(pageResult.result);
+    if(this.form.value.universidad === ''){      
+      this.esUniversidad = false;
+    }else{
+      this.esUniversidad = true;
+    }
     this.hasReachedLimit = pageResult.hasReachedLimit;
     this.currentPage = page;
   }
 
+  
+  showNextPage() {
+    console.log('STARS.componennt',this.starQuery.getStarsList().currentPage);
+    
+    this.svcStar.loadStars(
+      this.starQuery.getStarsList().currentPage + 1,
+      PAGE_SIZE,
+      this.searchFC.value,
+      false // Mantener resultados anteriores
+    );
+  }
+  /*
   showNextPage() {
     this.getPageAndConcatToCurrentListStar(this.currentPage + 1);
   }
+ */
+  showNextPageSelect(){
+    this.getPageAndConcatToCurrentListSelect(this.currentPage + 1);
+  }
 
+  
   buttonStyle() {
     return {
       background: !this.hasReachedLimit

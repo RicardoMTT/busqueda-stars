@@ -1,10 +1,6 @@
-import { StoreConfig, EntityStore, EntityState } from '@datorama/akita';
+import { StoreConfig, EntityStore, ID } from '@datorama/akita';
 import { Injectable } from '@angular/core';
-import { Star } from './stars.model';
-
-export interface StarsState extends EntityState<Star>{
-    filtro:string;
-}
+import { Starstate } from './stars.state';
 
 /*
     El store es un objeto que contiene el estado del store
@@ -12,13 +8,29 @@ export interface StarsState extends EntityState<Star>{
 */
 @StoreConfig({  name : 'stars'  })
 @Injectable({providedIn:'root'})
-export class StarsStore extends EntityStore<StarsState> {
+export class StarsStore extends EntityStore<Starstate> {
     
-    starStore:Star[] = [];
-
-    constructor() {
+    constructor(){
         super({
-            filtro:'ALL'
-        });        
+            ui:{
+                starsList: {
+                    currentPage: 1, 
+                    pageSize: 6,
+                    hasReachedLimit: false,
+                    pageIds: [],
+                }
+            }
+          });
+    }
+
+    updateList(
+        payload:Starstate['ui']['starsList']
+    ){
+        this.update({
+            ui:{
+                ...this.getValue().ui,
+                starsList:payload
+            }
+        })
     }
 }

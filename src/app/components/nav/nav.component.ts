@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
+import { FormControl, FormBuilder } from '@angular/forms';
+import { debounceTime, tap } from 'rxjs/operators';
 import { StarService } from 'src/app/services/star.service';
+const PAG_SIZE = 6;
 
 @Component({
   selector: 'app-nav',
@@ -11,19 +12,48 @@ import { StarService } from 'src/app/services/star.service';
 })
 export class NavComponent implements OnInit {
   stars: any[] = [];
-  searchFC = new FormControl('');
   ocultar:boolean = true;
+  searchFC : FormControl;
+  
 
-  constructor(private router:Router,private svcStar:StarService){}
+  constructor(private router:Router,
+              private svcStar:StarService,
+              private fb:FormBuilder
+              ){
+              this._buildForm();
+              this._initFormListeners();
+  }
 
+  private _buildForm(){
+    this.searchFC = this.fb.control('');
+  }
+
+  private _loadFirstResults(){    
+    this.svcStar.loadStars(
+      1,
+      PAG_SIZE,
+      this.searchFC.value,
+      false
+    );
+    
+  }
+  private _initFormListeners(){    
+    this.searchFC.valueChanges.
+      pipe(
+        debounceTime(300),
+        tap(val => {
+          this.svcStar.loadStars(
+            1,
+            PAG_SIZE,
+            val,
+            false
+          )
+        }
+        )
+    ).subscribe();
+  }
   ngOnInit(): void {
-    this.getPageAndConcatToCurrentListStar(this.currentPage);
-    this.searchFC.valueChanges.pipe(debounceTime(1200)).subscribe(val => {
-      //this.buscarStar();
-      this.stars = [];
-      this.currentPage = 1;
-      this.getPageAndConcatToCurrentListStar(this.currentPage);
-    });
+    this._loadFirstResults();
   }
 
   
