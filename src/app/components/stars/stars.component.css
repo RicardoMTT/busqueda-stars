@@ -1,10 +1,6 @@
-.cards {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
- 
+
+
+
 .buscador{
   display: flex;
   position: relative;
@@ -25,12 +21,6 @@
   padding: 2px 8px;
 }
 
-
-.inputClass{
-  text-align: center; 
-  width: 450px;
-}
-
 .container-titulo{
   display: flex;
   flex-direction: row;
@@ -41,16 +31,14 @@
   width: 100%;
   height: 80px;
   background:#FFF;
+  padding:20px 20px;
+}
+.titulo h1{
   color: #1A1A1A;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 45px;
   opacity: 1;
-  padding:20px 20px;
-}
-.card {
-  text-align: center;
-  width: 30%;
-  margin: 10px;
+
 }
 
 img {
@@ -59,18 +47,20 @@ img {
   cursor: pointer;
 }
 
-button {
-  width: 100%;
-}
-
 .centered {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: row;
+  justify-content: center;
 }
 
+.cards {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  justify-content: space-around;
+}
+
+/*BUTTON*/
 .contenido {
   margin-top: 10px;
   width: 100%;
@@ -87,6 +77,12 @@ input {
   width: 100%;
   height: 50px;
 }
+
+.inputClass{
+  text-align: center; 
+  width: 450px;
+}
+
 
 /*ANIMACIONES*/
 .animated {
@@ -161,12 +157,12 @@ input {
 }
 .texto-debajo{
   width: 90%;
-  height: 70px;
+  padding: 20px;
+  text-align: center;
   background-image: linear-gradient(to bottom,rgba(255,0,0,0), rgb(0, 0, 0));
   position: absolute;
   top: 85%;
   left: 50%;
-  padding: 0;
   transform: translate(-50%, -50%);
 }
 

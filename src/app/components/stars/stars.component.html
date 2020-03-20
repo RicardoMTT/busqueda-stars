@@ -1,9 +1,10 @@
 <div class="container-titulo">
   <div class="titulo">
-    <h1 class="animated fadeInUp">Nuestras estrellas</h1>
+    <h1 class="animated fadeInUp">Nuestros certificados</h1>
   </div>
 </div>
 
+<!--
 <div class="filtro-container">
 
   <div class="buscador-container">
@@ -24,17 +25,17 @@
 
 </div>
 
-
+-->
 <div *ngIf="stars.length <= 0 else Stars">
   No hay estreshas
 </div>
 
 <ng-template #Stars>
   <div class="centered" #noStars>
-    <section class="cards" [@starsList]="stars.length">
-      <mat-card class="card" *ngFor="let star of starQuery.page$|async">
+      <mat-card class="cards" *ngFor="let star of starQuery.page$|async">
+        
         <div class="contenedor">
-          <img src="../assets/adan.png" (click)="openDialog(1)" />
+          <img src="../assets/adan.png"  />
           <div class="texto-encima">
             <div>
               <img src="../assets/star.svg" class="contenedor" alt="">
@@ -42,9 +43,9 @@
                 {{ star.ranking }}
               </p>
             </div>
-
           </div>
         </div>
+
         <mat-card-header>
           <div class="texto-debajo">
             <mat-card-title>
@@ -57,8 +58,17 @@
         </mat-card-header>
 
       </mat-card>
-    </section>
 
+    </div>
+    <div class="paginacion">
+        <ul>
+          <li (click)="showNextPage()" style="cursor: pointer;">1</li>
+          <li (click)="showNextPage()" style="cursor: pointer;">2</li>
+          <li (click)="showNextPage()" style="cursor: pointer;">3</li>
+          <li (click)="showNextPage()" style="cursor: pointer;">4</li>
+        </ul>
+    </div>
+    <!--
     <div class="contenido" *ngIf="!esUniversidad">
       <button (click)="showNextPage()" [ngStyle]="buttonStyle()" [disabled]="starQuery.starsDisabledMore$ | async">Ver
         mas xd</button>
@@ -69,6 +79,5 @@
         [disabled]="starQuery.starsDisabledMore$ | async">Ver mas
         universidades xd</button>
     </div>
-
-  </div>
+    -->
 </ng-template>

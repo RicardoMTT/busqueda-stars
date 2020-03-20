@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, FormBuilder } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime, tap } from 'rxjs/operators';
 import { StarService } from 'src/app/services/star.service';
+import { universities } from 'src/app/mock/universities';
+import { UniversityService } from '../../services/university.service';
+import { UniversitiesQuery } from '../../core/stores/universities/universities.query';
+
 const PAG_SIZE = 6;
 
 @Component({
@@ -14,23 +18,47 @@ export class NavComponent implements OnInit {
   stars: any[] = [];
   ocultar: boolean = true;
   searchFC: FormControl;
+  universidades: any[] = universities;
+
+  form = new FormGroup({
+    universidad: new FormControl(this.universidades[4])
+  });
 
   constructor(
     private router: Router,
     private svcStar: StarService,
-    private fb: FormBuilder
-  ) {
+    private fb: FormBuilder,    
+    public universityService:UniversityService,
+    public universitiesQuery:UniversitiesQuery
+  ) {    
     this._buildForm();
     this._initFormListeners();
+    this._selectResult();
   }
 
-  private _buildForm() {
+  ngOnInit(): void {  
+    this.universityService.loadUniversities();
+    this._loadFirstResults();
+  }
+
+  private _buildForm() {    
     this.searchFC = this.fb.control('');
   }
 
-  private _loadFirstResults() {
+  private _loadFirstResults() {        
     this.svcStar.loadStars(1, PAG_SIZE, this.searchFC.value, false);
   }
+
+  private _selectResult(){   
+
+    this.form.valueChanges
+      .pipe(
+        tap(val => {
+            this.universityService.loadUniversities();
+        })
+      ).subscribe();
+  }
+ 
   private _initFormListeners() {
     this.searchFC.valueChanges
       .pipe(
@@ -41,10 +69,7 @@ export class NavComponent implements OnInit {
       )
       .subscribe();
   }
-  ngOnInit(): void {
-    this._loadFirstResults();
-  }
-
+  
   //paged query
   currentPage = 1;
   pageSize = 6;
@@ -62,13 +87,10 @@ export class NavComponent implements OnInit {
 
   buscarStar() {
     let termino: string = this.searchFC.value;
-    console.log(termino);
     this.router.navigate(['/resultado', termino]);
   }
 
   cambiarEstado() {
-    console.log('click');
     this.ocultar = !this.ocultar;
-    console.log(this.ocultar);
   }
 }

@@ -8,7 +8,6 @@ import { NavComponent } from './components/nav/nav.component';
 import { StarsComponent } from './components/stars/stars.component';
 import { HomeComponent } from './components/home/home.component';
 import { ResultadoComponent } from './components/resultado/resultado.component';
-import { CarouselComponent } from './components/carousel/carousel.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,7 +23,6 @@ import { MatCardModule } from '@angular/material/card';
     StarsComponent,
     HomeComponent,
     ResultadoComponent,
-    CarouselComponent,
     FooterComponent
   ],
   imports: [

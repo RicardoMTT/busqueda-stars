@@ -5,9 +5,19 @@
     
     <div class="buscador-container">
         <div class="divisor-container">
+            <img src="../../../assets/search.png" class="icon-search" alt="logo">
             <input class="form-control" class="inputClass" type="text" placeholder="Buscar Estrella"
                 [formControl]="searchFC">
         </div>
     </div>
-    
-</header>   
+</header> 
+<div class="form-container" class="options">
+    <form [formGroup]="form">
+      <select formControlName="universidad">
+        <option [ngValue]="null" disabled>Seleccione</option>
+        <option *ngFor="let university of universitiesQuery.universities$ | async" [ngValue]="university.nombre">
+            {{ university.nombre }}
+        </option>
+    </select>
+    </form>
+  </div>  

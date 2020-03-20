@@ -10,6 +10,7 @@ import { starsListAnimation } from './stars-list.animation';
 
 import { universities } from '../../mock/universities';
 import { StarsQuery } from 'src/app/core/stores/stars/stars.query';
+import { UniversitiesQuery } from 'src/app/core/stores/universities/universities.query';
 const PAGE_SIZE = 6;
 
 @Component({
@@ -38,10 +39,11 @@ export class StarsComponent implements OnInit {
     private svcStar: StarService,
     private router: Router,
     public dialog: MatDialog,
-    public starQuery: StarsQuery
+    public starQuery: StarsQuery,
   ) {}
 
   ngOnInit(): void {
+     
     // this.svcStar.loadStars();
     // this.stars =  this.starQuery.getStars();//Usando Query para sacar data del Store
 
@@ -69,7 +71,6 @@ export class StarsComponent implements OnInit {
 
   buscarStar() {
     let termino: string = this.searchFC.value;
-    console.log(termino);
     this.router.navigate(['/resultado', termino]);
   }
 
@@ -84,10 +85,9 @@ export class StarsComponent implements OnInit {
       this.lleno = true;
     }
   }
+  /** 
   openDialog(i) {
-    console.log('index', i);
     var starrr = this.svcStar.getStar(i);
-    console.log(starrr);
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
@@ -96,9 +96,8 @@ export class StarsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(resp => {
-      console.log('xd', resp);
     });
-  }
+  }*/
 
   //paged query
   currentPage = 1;
@@ -144,7 +143,6 @@ export class StarsComponent implements OnInit {
   }
 
   showNextPage() {
-    console.log('STARS.componennt', this.starQuery.getStarsList().currentPage);
 
     this.svcStar.loadStars(
       this.starQuery.getStarsList().currentPage + 1,

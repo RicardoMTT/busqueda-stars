@@ -4,7 +4,7 @@ import { StarsStore } from './stars.store';
 import { Starstate } from './stars.state';
 import { switchMap, map } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
-
+ 
 @Injectable({ providedIn: 'root' })
 export class StarsQuery extends QueryEntity<Starstate> {
   starsDisabledMore$ = combineLatest([
@@ -26,10 +26,6 @@ export class StarsQuery extends QueryEntity<Starstate> {
     */
   constructor(protected store: StarsStore) {
     super(store);
-    this.page$.subscribe(value => {
-      console.log('queryyy');
-      console.log(value);
-    });
   }
 
   getStarsList() {

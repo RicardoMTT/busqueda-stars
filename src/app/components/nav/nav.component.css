@@ -22,13 +22,44 @@ body {
   margin-right: auto;
 }
 
-
 .imagen-container{
   text-align: center;
   width: 100%;
 }
 
 
+/*Container*/
+.buscador-container{
+  width: 50%;
+  padding: 10px 10px;
+  display: flex;
+  position: relative;
+  width: 50%; 
+  margin-bottom: 10px;
+}
+
+/*Input*/
+
+input {
+  width: 100%;
+  height: 50px;
+}
+
+.inputClass{
+  text-align: center; 
+  width: 450px;
+}
+
+
+/*Icon*/
+.icon-search{
+  position: absolute;
+  height: 40px;
+  width: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 2px 8px;
+}
 
 @media only screen and(max-width:350px ){
   .header-container{

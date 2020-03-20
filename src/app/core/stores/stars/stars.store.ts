@@ -5,7 +5,7 @@ import { Starstate } from './stars.state';
 /*
     El store es un objeto que contiene el estado del store
     y sirve como la unica fuente de verdad
-*/
+*/ 
 @StoreConfig({ name: 'stars' })
 @Injectable({ providedIn: 'root' })
 export class StarsStore extends EntityStore<Starstate> {

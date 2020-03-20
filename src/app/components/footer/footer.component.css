@@ -10,23 +10,25 @@ p {
   margin-top: 20px;
 }
 
-.col1,.col2,.col3{
-  width: 30%;
+.col1,.col2,.col3,.col4{
+  text-align: center;
+  padding-top: 30px;
+  width: 20%;
 }
 @media only screen and(max-width:500px ){
   .footer-container{
     flex-direction: column;
   }
-  .col1,.col2,.col3{
+  .col1,.col2,.col3,.col4{
     width: 100%;  
   }
-
 }
+
 @media only screen and(max-width:350px ){
   .footer-container{
     flex-direction: column;
   }
-  .col1,.col2,.col3{
+  .col1,.col2,.col3.col4{
     width: 100%;  
   }
 
@@ -35,7 +37,7 @@ p {
   .footer-container{
     flex-direction: column;
   }
-  .col1,.col2,.col3{
+  .col1,.col2,.col3,.col4{
     width: 100%;
     text-align: center;
   }
