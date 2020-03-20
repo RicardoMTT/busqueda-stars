@@ -5,7 +5,7 @@ export const stars = [
     apellido: 'Gomez',
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
-    universidad:'san marcos',
+    universidad:'Universidad Pontifica Católica del Perú',
     ranking:'1'
   },
   {

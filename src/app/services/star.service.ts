@@ -29,9 +29,10 @@ export class StarService {
     page: number,
     pageSize: number,
     query: string,
-    resetResults: boolean
+    resetResults: boolean,
+    queryUni?: string
   ) {
-    //this.starsApi.getSearch(page, pageSize, query);
+
     this.Starstore.setLoading(true);
     this.starsApi
       .getPage(page, pageSize, query)

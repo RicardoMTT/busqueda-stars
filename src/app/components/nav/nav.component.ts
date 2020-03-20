@@ -46,15 +46,16 @@ export class NavComponent implements OnInit {
   }
 
   private _loadFirstResults() {        
-    this.svcStar.loadStars(1, PAG_SIZE, this.searchFC.value, false);
+    this.svcStar.loadStars(1, PAG_SIZE, this.searchFC.value, false,'');
   }
 
   private _selectResult(){   
 
     this.form.valueChanges
       .pipe(
-        tap(val => {
-            this.universityService.loadUniversities();
+        tap(val => { 
+          console.log('entro');
+          this.svcStar.loadStars(1, PAG_SIZE, val, true,val);
         })
       ).subscribe();
   }
@@ -64,7 +65,7 @@ export class NavComponent implements OnInit {
       .pipe(
         debounceTime(300),
         tap(val => {
-          this.svcStar.loadStars(1, PAG_SIZE, val, true);
+          this.svcStar.loadStars(1, PAG_SIZE, val, true,'');
         })
       )
       .subscribe();

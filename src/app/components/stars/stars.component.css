@@ -1,5 +1,12 @@
 
-
+@font-face {
+  font-family: lato;
+  src: url(../../../assets/font/Lato-Bold.ttf) format("opentype");
+}
+@font-face {
+  font-family: lato-medium;
+  src: url(../../../assets/font/Lato-Medium.ttf) format("opentype");
+}
 
 .buscador{
   display: flex;
@@ -173,14 +180,20 @@ input {
   transition: all .5s;
 }
 */
-.datos-star{
+.datos-star-main{
   color:white;
-  opacity: 1;
+  font-family: 'lato', 'arial', sans-serif;
+  opacity: 100%;
 }
 
-p{
-  font-family: 'Lato', sans-serif;
+.datos-star-uni{
+  color:white;
+  font-family: 'lato-medium';
+  opacity: 100%;
+  letter-spacing: 0;
+
 }
+
 
 
 .filtro-container{

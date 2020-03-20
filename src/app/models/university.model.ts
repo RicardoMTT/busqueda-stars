@@ -1,5 +1,7 @@
+import { ID } from '@datorama/akita';
+
 export class University {
-    id?: string;
+    id?: ID;  
     nombre?: string;
   }
   
