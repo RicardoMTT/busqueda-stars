@@ -3,13 +3,14 @@
     <h1 class="animated fadeInUp">Nuestras estrellas</h1>
   </div>
   <div class="buscador">
-    <input class="form-control" type="text" placeholder="Buscar Estrella" [formControl]="searchFC">
+    <img src="../../../assets/search.png" class="icon-search" alt="">
+    <input class="form-control" class="inputClass" type="text" placeholder="Buscar Estrella" [formControl]="searchFC">
   </div>
 
 </div>
 
 <div *ngIf="stars.length <= 0 else Stars">
-  cargando....
+  No hay estreshas
 </div>
 <ng-template #Stars>
   <div class="centered" #noStars>

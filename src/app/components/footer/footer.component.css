@@ -4,7 +4,7 @@
   color: #FFF;
   display: flex;
   width: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 p {
   margin-top: 20px;
@@ -26,17 +26,8 @@ p {
   .footer-container{
     flex-direction: column;
   }
-  .col1{
+  .col1,.col2,.col3{
     width: 100%;
     text-align: center;
   }
-  .col2{
-    width: 100%;
-    text-align: center;
-  }
-  .col3{
-    width: 100%;
-    text-align: center;
-  }
-  
 }

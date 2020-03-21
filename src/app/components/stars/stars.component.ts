@@ -19,7 +19,7 @@ export class StarsComponent implements OnInit {
   stars: any[] = [];
   lleno: boolean = false;
 
-  searchFC = new FormControl(null);
+  searchFC = new FormControl('');
 
   constructor(
     private svcStar: StarService,
@@ -31,7 +31,10 @@ export class StarsComponent implements OnInit {
     // this.stars = this.svcStar.getStars(this.inicio);
     this.getPageAndConcatToCurrentList(this.currentPage);
     this.searchFC.valueChanges.pipe(debounceTime(1200)).subscribe(val => {
-      this.buscarStar();
+      //this.buscarStar();
+      this.stars = [];
+      this.currentPage = 1;
+      this.getPageAndConcatToCurrentList(this.currentPage);
     });
   }
 
@@ -73,7 +76,7 @@ export class StarsComponent implements OnInit {
   pageSize = 6;
   hasReachedLimit = false;
   getPageAndConcatToCurrentList(page: number) {
-    const pageResult = this.svcStar.getPage(page, this.pageSize);
+    const pageResult = this.svcStar.getPage(page, this.pageSize,this.searchFC.value);
     console.log(page);
     this.stars = this.stars.concat(pageResult.result);
     this.hasReachedLimit = pageResult.hasReachedLimit;

@@ -69,9 +69,6 @@ input::-webkit-input-placeholder {
   .nav-container{
     display: none;
   }
-  .mostrar{
-    display: block;
-  }
 }
 
 

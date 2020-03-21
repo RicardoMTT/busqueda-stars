@@ -40,8 +40,13 @@ export class StarService {
     return StarArray;
   }
 
-  getPage(page: number, pageSize: number) {
-    const totalList = this.stars;
+  getPage(page: number, pageSize: number,query:string='') {
+    const totalList = this.stars.filter((star)=>{
+      
+      return star.nombre.includes(query);
+    });
+    console.log(totalList);
+    
     const pageIndexStart = (page - 1) * pageSize;
     const pageIndexEnd = pageIndexStart + pageSize;
     return {
