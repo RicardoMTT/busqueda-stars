@@ -25,7 +25,8 @@ import { UniversityApi } from '../core/api/universities.api';
       this.universityApi.getUniversity()
       .pipe(
         tap((result:any) => {
-          console.log('result',result);
+          //Metodo set es para meter data completa, si meto data y en el store existe data
+          //entonces los borra y mete la nueva data.
           this.universityStore.set(result.data)
         }),
         tap(_ => this.universityStore.setLoading(false)),

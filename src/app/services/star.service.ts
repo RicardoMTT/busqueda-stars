@@ -6,6 +6,7 @@ import { StarsQuery } from '../core/stores/stars/stars.query';
 import { StarsApi } from '../core/api/stars.api';
 import { tap } from 'rxjs/operators';
 import { UniversitiesStore } from '../core/stores/universities/universities.store';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,14 +24,44 @@ export class StarService {
     this.stars = stars;
   }
 
-
-
-  public loadStars(
+  public loadStarsSelect( 
     page: number,
     pageSize: number,
     query: string,
+    resetResults: boolean,){
+      this.Starstore.setLoading(true);
+      console.log('query',query);
+      
+      this.starsApi. 
+      getPageUniversity(page,pageSize,query)
+        .pipe(
+          tap((result:any) => {
+            this.Starstore.upsertMany(result.data)
+          }),
+          tap(_ => this.Starstore.setLoading(false)),
+          tap(result => {
+            console.log('result.data',result.data);
+            const pageUniversitiesId = result.data.map(p => p.id);
+            const newPageStars = resetResults
+            ? [...pageUniversitiesId]
+            : [...this.starsQuery.getStarsList().pageIds, ...pageUniversitiesId];
+            const hasReachedLimit = result.count === newPageStars.length;
+            this.Starstore.updateList({
+              currentPage: page,
+              pageSize,
+              hasReachedLimit,
+              pageIds: newPageStars,
+              query 
+            });
+          })
+        ).subscribe();
+  }
+
+  public loadStars(
+    page: number, 
+    pageSize: number,
+    query: string,
     resetResults: boolean,
-    queryUni?: string
   ) {
 
     this.Starstore.setLoading(true);
@@ -59,17 +90,32 @@ export class StarService {
       .subscribe();
   }
 
-  public getStars(inicio) {
-    this.starsSix = [];
-    let inicio1 = inicio + 1;
-    for (let i = 0; i < inicio1 * 6; i++) {
-      if (this.stars[i] === undefined) {
-        return [];
-      }
-      this.starsSix.push(this.stars[i]);
-    }
-    return this.starsSix;
+  public getStars() {
+    this.starsApi.getStars()
+    .pipe(
+      tap(
+        result => {          
+          this.Starstore.set(result)
+        }
+      ),
+      tap(_ => this.Starstore.setLoading(false)),
+      catchError(error => {
+        console.log(error);
+        return null;
+      })
+    ).subscribe();
   }
+
+
+
+
+
+
+
+
+
+
+
 
   getStar(index) {
     return this.stars[index];

@@ -31,6 +31,7 @@ export class NavComponent implements OnInit {
     public universityService:UniversityService,
     public universitiesQuery:UniversitiesQuery
   ) {    
+
     this._buildForm();
     this._initFormListeners();
     this._selectResult();
@@ -46,7 +47,7 @@ export class NavComponent implements OnInit {
   }
 
   private _loadFirstResults() {        
-    this.svcStar.loadStars(1, PAG_SIZE, this.searchFC.value, false,'');
+    this.svcStar.loadStars(1, PAG_SIZE, this.searchFC.value, false);
   }
 
   private _selectResult(){   
@@ -55,7 +56,7 @@ export class NavComponent implements OnInit {
       .pipe(
         tap(val => { 
           console.log('entro');
-          this.svcStar.loadStars(1, PAG_SIZE, val, true,val);
+          this.svcStar.loadStarsSelect(1, PAG_SIZE, val.universidad, true);
         })
       ).subscribe();
   }
@@ -65,7 +66,7 @@ export class NavComponent implements OnInit {
       .pipe(
         debounceTime(300),
         tap(val => {
-          this.svcStar.loadStars(1, PAG_SIZE, val, true,'');
+          this.svcStar.loadStars(1, PAG_SIZE, val, true);
         })
       )
       .subscribe();

@@ -10,7 +10,7 @@ import { starsListAnimation } from './stars-list.animation';
 
 import { universities } from '../../mock/universities';
 import { StarsQuery } from 'src/app/core/stores/stars/stars.query';
-import { UniversitiesQuery } from 'src/app/core/stores/universities/universities.query';
+
 const PAGE_SIZE = 6;
 
 @Component({
@@ -23,9 +23,9 @@ export class StarsComponent implements OnInit {
   inicio: number = 0;
   stars: any[] = [];
   lleno: boolean = false;
-
+  paginacion:number
   esUniversidad: boolean = false;
-
+  paginacionTotal:any[];
   universidades: any[] = universities;
 
   form = new FormGroup({
@@ -43,14 +43,9 @@ export class StarsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-     
-    // this.svcStar.loadStars();
-    // this.stars =  this.starQuery.getStars();//Usando Query para sacar data del Store
-
-    this.getPageAndConcatToCurrentListStar(this.currentPage);
-    //debounceTime:solicitará API solo después de un intervalo de tiempo específico.
+    this.svcStar.getStars();
+    
     this.searchFC.valueChanges.pipe(debounceTime(1200)).subscribe(val => {
-      //this.buscarStar();
       this.stars = [];
       this.currentPage = 1;
       this.getPageAndConcatToCurrentListStar(this.currentPage);
@@ -69,36 +64,7 @@ export class StarsComponent implements OnInit {
     });
   }
 
-  buscarStar() {
-    let termino: string = this.searchFC.value;
-    this.router.navigate(['/resultado', termino]);
-  }
-
-  /*buscarStar(termino:string){
-    this.router.navigate(['/resultado',termino]);
-  } 
-*/
-  verMas() {
-    this.inicio = this.inicio + 1;
-    if (this.inicio == 1) {
-      this.stars = this.svcStar.getStars(this.inicio);
-      this.lleno = true;
-    }
-  }
-  /** 
-  openDialog(i) {
-    var starrr = this.svcStar.getStar(i);
-
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: {
-        image: starrr.image
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(resp => {
-    });
-  }*/
-
+ 
   //paged query
   currentPage = 1;
   pageSize = 6;
@@ -116,6 +82,7 @@ export class StarsComponent implements OnInit {
   }
 
   getPageAndConcatToCurrentListStar(page: number) {
+    
     const pageResult = this.svcStar.getPage(
       page,
       this.pageSize,
@@ -143,7 +110,7 @@ export class StarsComponent implements OnInit {
   }
 
   showNextPage() {
-
+    
     this.svcStar.loadStars(
       this.starQuery.getStarsList().currentPage + 1,
       PAGE_SIZE,
@@ -151,11 +118,7 @@ export class StarsComponent implements OnInit {
       false // Mantener resultados anteriores
     );
   }
-  /*
-  showNextPage() {
-    this.getPageAndConcatToCurrentListStar(this.currentPage + 1);
-  }
- */
+  
   showNextPageSelect() {
     this.getPageAndConcatToCurrentListSelect(this.currentPage + 1);
   }
@@ -167,4 +130,43 @@ export class StarsComponent implements OnInit {
         : 'rgb(247, 176, 162)'
     };
   }
+
+
+
+  
+
+  buscarStar() {
+    let termino: string = this.searchFC.value;
+    this.router.navigate(['/resultado', termino]);
+  }
+
 }
+
+
+ /*buscarStar(termino:string){
+    this.router.navigate(['/resultado',termino]);
+  } 
+
+  verMas() {
+    this.inicio = this.inicio + 1;
+    if (this.inicio == 1) {
+      this.stars = this.svcStar.getStars(this.inicio);
+      this.lleno = true;
+    }
+  }*/
+  /** 
+  openDialog(i) {
+    var starrr = this.svcStar.getStar(i);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        image: starrr.image
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(resp => {
+    });
+  }*/
+  
+     //this.paginacion = (this.svcStar.getStars().length/6);
+     //this.paginacionTotal = this.svcStar.getStars().slice(0,this.paginacion);

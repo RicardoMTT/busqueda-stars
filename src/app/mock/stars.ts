@@ -1,8 +1,8 @@
 export const stars = [
   {
     id: Math.random(),
-    nombre: 'daniel', 
-    apellido: 'Gomez',
+    nombre: 'Carla ', 
+    apellido: 'Cabral Vasco',
     image:
       'https://www.realmadrid.com/img/vertical_380px/carvajal_380x501_20191221090919.jpg',
     universidad:'Universidad Pontifica Católica del Perú',

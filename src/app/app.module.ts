@@ -15,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { MatCardModule } from '@angular/material/card';
 
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,14 @@ import { MatCardModule } from '@angular/material/card';
     FooterComponent
   ],
   imports: [
-    BrowserModule,APP_ROUTING,CommonModule,ReactiveFormsModule, BrowserAnimationsModule,MatDialogModule,MatCardModule
+    BrowserModule,
+    APP_ROUTING,
+    CommonModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatCardModule,
+    HttpClientModule
   ],
   entryComponents:[ConfirmDialogComponent],
   providers: [],

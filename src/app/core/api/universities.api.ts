@@ -6,24 +6,18 @@ import { universities } from '../../mock/universities';
 @Injectable({
   providedIn: 'root'
 })
-export class UniversityApi{
+export class UniversityApi {
 
-    public getUniversity(){
-      const totalList = this.getUniversities();
-      console.log('total list',totalList);
-      
-      return timer(1000).pipe(
-        mapTo({
-            data: totalList
-        })
-    ); 
-    }
-    public getUniversities(query?) {
-        if (typeof query === 'string') {
-          return universities.filter(p => p.nombre.includes(query));
-        }else{
-          return universities;
+  public getUniversity() {
+    const totalList = this.getUniversities();
+    return timer(1000).pipe(
+      mapTo({
+        data: totalList
+      })
+    );
+  }
 
-        }
-    }
+  public getUniversities() {
+    return universities;
+  }
 }

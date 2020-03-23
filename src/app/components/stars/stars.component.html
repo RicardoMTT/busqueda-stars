@@ -4,6 +4,56 @@
   </div>
 </div>
 
+  <div class="centered">
+    <section class="cards">
+      <mat-card class="card"  *ngFor="let star of starQuery.page$|async">
+        <div class="contenedor">
+          <img src="../assets/adan.png" class="imgStarrr"/>
+          <div class="texto-encima">
+            <div class="contenedorImg">
+              <img src="../assets/star.svg" class="" alt="">
+              <p style="position: relative;color:rgb(255, 255, 255);margin-top: -25px;left: 50%;transform: translate(-50%, -50%)">
+                {{ star.ranking }}
+              </p>
+            </div>
+          </div>
+          <div class="texto-debajo">
+            <mat-card-title><p class="datos-star" >{{ star.nombre }} {{ star.apellido}}</p></mat-card-title>
+            <mat-card-subtitle><p class="datos-star">{{ star.universidad }}</p></mat-card-subtitle>  
+          </div>
+        </div>
+      </mat-card>
+    </section>
+    </div>
+
+    <div class="contenido" *ngIf="!esUniversidad">
+      <button (click)="showNextPage()" [ngStyle]="buttonStyle()" [disabled]="starQuery.starsDisabledMore$ | async">
+        Ver mas
+      </button>
+    </div>
+
+    <div class="contenido" *ngIf="esUniversidad">
+      <button (click)="showNextPageSelect()" [ngStyle]="buttonStyle()"
+        [disabled]="starQuery.starsDisabledMore$ | async">Ver mas 
+      </button>
+    </div>
+
+
+
+
+
+<!--
+    <div class="navegacion-container">
+      <ul class="navegacion">
+        <li *ngFor="let val of paginacionTotal;let i=index" (click)="showNextPage()">
+          {{ i+1 }}
+        </li>
+      </ul>
+    </div>
+-->
+
+
+ 
 <!--
 <div class="filtro-container">
 
@@ -26,58 +76,3 @@
 </div>
 
 -->
-<div *ngIf="stars.length <= 0 else Stars">
-  No hay estreshas
-</div>
-
-<ng-template #Stars>
-  <div class="centered" #noStars>
-      <mat-card class="cards" *ngFor="let star of starQuery.page$|async">
-        
-        <div class="contenedor">
-          <img src="../assets/adan.png"  />
-          <div class="texto-encima">
-            <div>
-              <img src="../assets/star.svg" class="contenedor" alt="">
-              <p style="position: relative;margin-top: -25px;left: 50%;transform: translate(-50%, -50%)">
-                {{ star.ranking }}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <mat-card-header>
-          <div class="texto-debajo">
-            <mat-card-title>
-              <p class="datos-star-main">{{ star.nombre }} {{ star.apellido}}</p>
-            </mat-card-title>
-            <mat-card-subtitle>
-              <p class="datos-star-uni">{{ star.universidad }}</p>
-            </mat-card-subtitle>
-          </div>
-        </mat-card-header>
-
-      </mat-card>
-
-    </div>
-    <div class="paginacion">
-        <ul>
-          <li (click)="showNextPage()" style="cursor: pointer;">1</li>
-          <li (click)="showNextPage()" style="cursor: pointer;">2</li>
-          <li (click)="showNextPage()" style="cursor: pointer;">3</li>
-          <li (click)="showNextPage()" style="cursor: pointer;">4</li>
-        </ul>
-    </div>
-    <!--
-    <div class="contenido" *ngIf="!esUniversidad">
-      <button (click)="showNextPage()" [ngStyle]="buttonStyle()" [disabled]="starQuery.starsDisabledMore$ | async">Ver
-        mas xd</button>
-    </div>
-
-    <div class="contenido" *ngIf="esUniversidad">
-      <button (click)="showNextPageSelect()" [ngStyle]="buttonStyle()"
-        [disabled]="starQuery.starsDisabledMore$ | async">Ver mas
-        universidades xd</button>
-    </div>
-    -->
-</ng-template>
