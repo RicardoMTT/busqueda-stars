@@ -19,8 +19,12 @@
           </div>
           <div class="texto-debajo">
             <mat-card-title><p class="datos-star" >{{ star.nombre }} {{ star.apellido}}</p></mat-card-title>
-            <mat-card-subtitle><p class="datos-star">{{ star.universidad.nombre }}</p></mat-card-subtitle>  
-            <mat-card-subtitle><p class="datos-star">{{ star.carrera.nombre }}</p></mat-card-subtitle>  
+            <mat-card-subtitle>
+              <div class="datos-star">
+                <p>{{ star.universidad.nombre }}</p>
+                <p>{{ star.carrera.nombre }}</p>
+              </div>
+            </mat-card-subtitle>  
           </div>
         </div>
       </mat-card>

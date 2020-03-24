@@ -6,7 +6,7 @@ import { mapTo,map } from 'rxjs/operators';
 import { Star } from '../../models/star.model';
 import { StarsQuery } from '../../core/stores/stars/stars.query';
 
-const localUrl = 'http://161.35.5.244:1338/estudiantes?nombre=';
+const localUrl = 'http://161.35.5.244:1338/estudiantes';
 @Injectable({
   providedIn: 'root'
 })
@@ -42,9 +42,8 @@ export class StarsApi{
   
 
     public getStarHttp(nombre: any) {
-      console.log(localUrl+nombre);
       return this.http
-        .get(localUrl+`${nombre}`)
+        .get(localUrl+'?nombre='+nombre)
         .pipe(map(resp => resp));
     }
   
