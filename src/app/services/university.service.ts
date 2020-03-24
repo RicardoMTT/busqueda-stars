@@ -17,23 +17,19 @@ import { UniversityApi } from '../core/api/universities.api';
     ngOnInit(): void {
         
     }
-  
+   
   
     public loadUniversities(){    
       
-      this.universityStore.setLoading(true);
       this.universityApi.getUniversity()
-      .pipe(
-        tap((result:any) => {
-          //Metodo set es para meter data completa, si meto data y en el store existe data
-          //entonces los borra y mete la nueva data.
-          this.universityStore.set(result.data)
-        }),
-        tap(_ => this.universityStore.setLoading(false)),
-        tap(result => {
-            console.log(result);
-        })
-      ).subscribe();
+    .pipe(
+      tap(
+        result => {          
+          this.universityStore.set(result)
+        }
+      ),
+      tap(_ => this.universityStore.setLoading(false))
+    ).subscribe();
     }
     
   

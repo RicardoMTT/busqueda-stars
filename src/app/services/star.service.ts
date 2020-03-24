@@ -6,7 +6,7 @@ import { StarsQuery } from '../core/stores/stars/stars.query';
 import { StarsApi } from '../core/api/stars.api';
 import { tap } from 'rxjs/operators';
 import { UniversitiesStore } from '../core/stores/universities/universities.store';
-import { catchError } from 'rxjs/operators';
+import { catchError,shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,70 +24,37 @@ export class StarService {
     this.stars = stars;
   }
 
-  public loadStarsSelect( 
-    page: number,
-    pageSize: number,
-    query: string,
-    resetResults: boolean,){
+  private searchStar$; 
+
+
+  public loadStarsSelect( query:string){
       this.Starstore.setLoading(true);
-      console.log('query',query);
-      
+       
       this.starsApi. 
-      getPageUniversity(page,pageSize,query)
+      getPageUniversity(query)
         .pipe(
           tap((result:any) => {
             this.Starstore.upsertMany(result.data)
           }),
           tap(_ => this.Starstore.setLoading(false)),
           tap(result => {
-            console.log('result.data',result.data);
-            const pageUniversitiesId = result.data.map(p => p.id);
-            const newPageStars = resetResults
-            ? [...pageUniversitiesId]
-            : [...this.starsQuery.getStarsList().pageIds, ...pageUniversitiesId];
-            const hasReachedLimit = result.count === newPageStars.length;
-            this.Starstore.updateList({
-              currentPage: page,
-              pageSize,
-              hasReachedLimit,
-              pageIds: newPageStars,
-              query 
-            });
+           
           })
         ).subscribe();
   }
 
-  public loadStars(
-    page: number, 
-    pageSize: number,
-    query: string,
-    resetResults: boolean,
-  ) {
+  public loadStars(query:string) {
 
     this.Starstore.setLoading(true);
     this.starsApi
-      .getPage(page, pageSize, query)
+      .getStarHttp(query)
       .pipe(
-        tap((result: any) => this.Starstore.upsertMany(result.data)),
-        tap(_ => this.Starstore.setLoading(false)),
-        tap(result => {
-
-          const pageStarsId = result.data.map(p => p.id);
-          const newPageStars = resetResults
-            ? [...pageStarsId]
-            : [...this.starsQuery.getStarsList().pageIds, ...pageStarsId];
-            
-          const hasReachedLimit = result.count === newPageStars.length;
-          this.Starstore.updateList({
-            currentPage: page,
-            pageSize,
-            hasReachedLimit,
-            pageIds: newPageStars,
-            query 
-          });
-        })
-      )
-      .subscribe();
+        tap((result: any) => {
+          console.log('Result',result);
+          this.Starstore.upsertMany(result)
+        }),
+        tap(_ => this.Starstore.setLoading(false))
+      ).subscribe();
   }
 
   public getStars() {

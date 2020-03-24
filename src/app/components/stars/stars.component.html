@@ -19,7 +19,8 @@
           </div>
           <div class="texto-debajo">
             <mat-card-title><p class="datos-star" >{{ star.nombre }} {{ star.apellido}}</p></mat-card-title>
-            <mat-card-subtitle><p class="datos-star">{{ star.universidad }}</p></mat-card-subtitle>  
+            <mat-card-subtitle><p class="datos-star">{{ star.universidad.nombre }}</p></mat-card-subtitle>  
+            <mat-card-subtitle><p class="datos-star">{{ star.carrera.nombre }}</p></mat-card-subtitle>  
           </div>
         </div>
       </mat-card>
@@ -32,17 +33,17 @@
       </button>
     </div>
 
+
+
+
+<!--
+
     <div class="contenido" *ngIf="esUniversidad">
       <button (click)="showNextPageSelect()" [ngStyle]="buttonStyle()"
         [disabled]="starQuery.starsDisabledMore$ | async">Ver mas 
       </button>
     </div>
 
-
-
-
-
-<!--
     <div class="navegacion-container">
       <ul class="navegacion">
         <li *ngFor="let val of paginacionTotal;let i=index" (click)="showNextPage()">

@@ -2,12 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StarService } from '../../services/star.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { FormControl, FormGroup } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
 import { starsListAnimation } from './stars-list.animation';
-
 import { universities } from '../../mock/universities';
 import { StarsQuery } from 'src/app/core/stores/stars/stars.query';
 
@@ -23,7 +19,6 @@ export class StarsComponent implements OnInit {
   inicio: number = 0;
   stars: any[] = [];
   lleno: boolean = false;
-  paginacion:number
   esUniversidad: boolean = false;
   paginacionTotal:any[];
   universidades: any[] = universities;
@@ -44,27 +39,8 @@ export class StarsComponent implements OnInit {
 
   ngOnInit(): void {
     this.svcStar.getStars();
-    
-    this.searchFC.valueChanges.pipe(debounceTime(1200)).subscribe(val => {
-      this.stars = [];
-      this.currentPage = 1;
-      this.getPageAndConcatToCurrentListStar(this.currentPage);
-    });
-
-    this.searchFCU.valueChanges.pipe(debounceTime(1200)).subscribe(val => {
-      this.stars = [];
-      this.currentPage = 1;
-      this.getPageAndConcatToCurrentList(this.currentPage);
-    });
-
-    this.form.valueChanges.pipe().subscribe(val => {
-      this.stars = [];
-      this.currentPage = 1;
-      this.getPageAndConcatToCurrentListSelect(this.currentPage);
-    });
   }
 
- 
   //paged query
   currentPage = 1;
   pageSize = 6;
@@ -82,7 +58,6 @@ export class StarsComponent implements OnInit {
   }
 
   getPageAndConcatToCurrentListStar(page: number) {
-    
     const pageResult = this.svcStar.getPage(
       page,
       this.pageSize,
@@ -93,35 +68,13 @@ export class StarsComponent implements OnInit {
     this.currentPage = page;
   }
 
-  getPageAndConcatToCurrentListSelect(page: number) {
-    const pageResult = this.svcStar.getPageUniverisdad(
-      page,
-      this.pageSize,
-      this.form.value.universidad
-    );
-    this.stars = this.stars.concat(pageResult.result);
-    if (this.form.value.universidad === '') {
-      this.esUniversidad = false;
-    } else {
-      this.esUniversidad = true;
-    }
-    this.hasReachedLimit = pageResult.hasReachedLimit;
-    this.currentPage = page;
-  }
 
   showNextPage() {
-    
     this.svcStar.loadStars(
-      this.starQuery.getStarsList().currentPage + 1,
-      PAGE_SIZE,
       this.starQuery.getStarsListUI().query,
-      false // Mantener resultados anteriores
     );
   }
   
-  showNextPageSelect() {
-    this.getPageAndConcatToCurrentListSelect(this.currentPage + 1);
-  }
 
   buttonStyle() {
     return {
@@ -130,20 +83,17 @@ export class StarsComponent implements OnInit {
         : 'rgb(247, 176, 162)'
     };
   }
+}
 
 
-
-  
-
+ /*
+ 
   buscarStar() {
     let termino: string = this.searchFC.value;
     this.router.navigate(['/resultado', termino]);
   }
-
-}
-
-
- /*buscarStar(termino:string){
+  
+  buscarStar(termino:string){
     this.router.navigate(['/resultado',termino]);
   } 
 
@@ -170,3 +120,49 @@ export class StarsComponent implements OnInit {
   
      //this.paginacion = (this.svcStar.getStars().length/6);
      //this.paginacionTotal = this.svcStar.getStars().slice(0,this.paginacion);
+
+
+       
+/** 
+    this.searchFC.valueChanges.pipe(debounceTime(1200)).subscribe(val => {
+      this.stars = [];
+      this.currentPage = 1;
+      this.getPageAndConcatToCurrentListStar(this.currentPage);
+    });
+
+    this.searchFCU.valueChanges.pipe(debounceTime(1200)).subscribe(val => {
+      this.stars = [];
+      this.currentPage = 1;
+      this.getPageAndConcatToCurrentList(this.currentPage);
+    });
+
+    this.form.valueChanges.pipe().subscribe(val => {
+      this.stars = [];
+      this.currentPage = 1;
+      this.getPageAndConcatToCurrentListSelect(this.currentPage);
+    });
+
+
+
+
+    
+  getPageAndConcatToCurrentListSelect(page: number) {
+    const pageResult = this.svcStar.getPageUniverisdad(
+      page,
+      this.pageSize,
+      this.form.value.universidad
+    );
+    this.stars = this.stars.concat(pageResult.result);
+    if (this.form.value.universidad === '') {
+      this.esUniversidad = false;
+    } else {
+      this.esUniversidad = true;
+    }
+    this.hasReachedLimit = pageResult.hasReachedLimit;
+    this.currentPage = page;
+  }
+  
+  showNextPageSelect() {
+    this.getPageAndConcatToCurrentListSelect(this.currentPage + 1);
+  }
+*/

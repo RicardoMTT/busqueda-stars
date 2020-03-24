@@ -3,21 +3,19 @@ import { HttpClient } from '@angular/common/http';
 
 import { timer } from 'rxjs';
 import { mapTo,map } from 'rxjs/operators';
-import { stars } from '../../mock/stars';
 import { Star } from '../../models/star.model';
+import { StarsQuery } from '../../core/stores/stars/stars.query';
 
-const localUrl = 'http://161.35.5.244:1338/estudiantes';
+const localUrl = 'http://161.35.5.244:1338/estudiantes?nombre=';
 @Injectable({
   providedIn: 'root'
 })
 export class StarsApi{
 
-    constructor(private http:HttpClient){
+    constructor(
+      private http:HttpClient,
+      private queryStar:StarsQuery){
         this.getStars();
-    }
-
-    public getStarsTotal(){      
-        return stars;
     }
 
     public getStars(){
@@ -42,24 +40,28 @@ export class StarsApi{
              );
     }
   
+
+    public getStarHttp(nombre: any) {
+      console.log(localUrl+nombre);
+      return this.http
+        .get(localUrl+`${nombre}`)
+        .pipe(map(resp => resp));
+    }
+  
+
+
+
     private getFilteredListUniversity(query: string | Map<string, string>) {
-      console.log('query',query);
-      
-      if (typeof query === 'string') {
-             
-        return stars.filter(p => p.universidad.includes(query));
-      }
-      if (query instanceof Map) {
-        return stars;
-      }
+     
+      return null;
     }
 
-    getPageUniversity(page:number ,pageSize:number ,query:string | Map<string,string>){
+    getPageUniversity(query:string | Map<string,string>){
       const filteredList = this.getFilteredListUniversity(query);
       console.log('universidades',filteredList);
       
-      const startIndex = (page-1)*pageSize;
-      const endIndex = startIndex + pageSize;
+      const startIndex = 0;
+      const endIndex = 0;
       return timer(1000).pipe(
           mapTo({
               count: filteredList.length,
@@ -71,10 +73,10 @@ export class StarsApi{
  //Retorna la lista filtrada sino toda la lista
  private getFilteredList(query: string | Map<string, string>) {
   if (typeof query === 'string') {
-    return stars.filter(p => p.nombre.includes(query));
+    return null;
   }
   if (query instanceof Map) {
-    return stars;
+    return null;
   }
 }
   getPage(page:number ,pageSize:number ,query:string | Map<string,string>){

@@ -24,7 +24,7 @@ export class NavComponent implements OnInit {
     universidad: new FormControl(this.universidades[4])
   });
 
-  constructor(
+  constructor( 
     private router: Router,
     private svcStar: StarService,
     private fb: FormBuilder,    
@@ -46,17 +46,14 @@ export class NavComponent implements OnInit {
     this.searchFC = this.fb.control('');
   }
 
-  private _loadFirstResults() {        
-    this.svcStar.loadStars(1, PAG_SIZE, this.searchFC.value, false);
-  }
-
+ 
   private _selectResult(){   
 
     this.form.valueChanges
       .pipe(
         tap(val => { 
           console.log('entro');
-          this.svcStar.loadStarsSelect(1, PAG_SIZE, val.universidad, true);
+          this.svcStar.loadStarsSelect(val.universidad);
         })
       ).subscribe();
   }
@@ -66,12 +63,15 @@ export class NavComponent implements OnInit {
       .pipe(
         debounceTime(300),
         tap(val => {
-          this.svcStar.loadStars(1, PAG_SIZE, val, true);
+          this.svcStar.loadStars(val);
         })
       )
       .subscribe();
   }
-  
+  private _loadFirstResults() {        
+    this.svcStar.loadStars(this.searchFC.value);
+  }
+
   //paged query
   currentPage = 1;
   pageSize = 6;
