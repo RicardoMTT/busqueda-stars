@@ -1,28 +1,25 @@
-<header class="header-container">
+<header class="header-container" [formGroup]="searchFG">
     <div class="imagen-container">
         <img src="../../../assets/LogoResponsive.png" alt="cargando" class="logo">
     </div>
-    
+
     <div class="buscador-container">
         <div class="divisor-container">
             <img src="../../../assets/Group 9.svg" class="icon-search" alt="logo">
-            <input class="inputClass" type="text" placeholder="Buscar Alumno"
-                [formControl]="searchFC">
+            <input class="inputClass" type="text" placeholder="Buscar Alumno" formControlName="nombre">
         </div>
 
         <div class="form-container">
-            <form [formGroup]="form" >
-                <select formControlName="universidad" class="formClass">
-                    <option [ngValue]="null" disabled style="text-align: center;">
-                        <p>Buscar por universidad</p>
-                    </option>
-                    <option *ngFor="let university of universitiesQuery.universities$ | async" [ngValue]="university.nombre">
-                        {{ university.nombre }}
-                    </option>
-                </select>
-            </form>
-        </div>  
+            <select formControlName="universidad" class="formClass">
+                <option [ngValue]="null" style="text-align: center;">
+                    <p>Buscar por universidad</p>
+                </option>
+                <option *ngFor="let university of universitiesQuery.universities$ | async" [ngValue]="university">
+                    {{ university.nombre }}
+                </option>
+            </select>
+        </div>
 
     </div>
 
-</header> 
+</header>

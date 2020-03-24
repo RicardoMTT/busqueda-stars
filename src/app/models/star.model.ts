@@ -1,21 +1,27 @@
 import { ID } from '@datorama/akita';
 
 export class Star {
-  id?: ID;  
+  id?: ID;
   nombre?: string;
   apellido?: string;
   imagen?: string;
-  carrera?:string;
-  universidad?: string;
+  carrera?: any;
+  universidad?: any;
+  ranking?: number;
 
-  public constructor(id:string,nombre:string,apellido:string,imagen:string,carrera:string,universidad:string){
+  public constructor(
+    id: string,
+    nombre: string,
+    apellido: string,
+    imagen: string,
+    carrera: string,
+    universidad: string
+  ) {
     this.id = id;
     this.nombre = nombre;
     this.apellido = apellido;
     this.imagen = imagen;
     this.carrera = carrera;
-    this.universidad=universidad;
-
+    this.universidad = universidad;
   }
-
 }

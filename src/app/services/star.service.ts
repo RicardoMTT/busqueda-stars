@@ -6,7 +6,7 @@ import { StarsQuery } from '../core/stores/stars/stars.query';
 import { StarsApi } from '../core/api/stars.api';
 import { tap } from 'rxjs/operators';
 import { UniversitiesStore } from '../core/stores/universities/universities.store';
-import { catchError,shareReplay } from 'rxjs/operators';
+import { catchError, shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,73 +16,58 @@ export class StarService {
   stars: Star[] = [];
 
   constructor(
-    private Starstore: StarsStore,
+    private starStore: StarsStore,
     private starsApi: StarsApi,
     private starsQuery: StarsQuery,
-    private universityStore:UniversitiesStore
-  ) {
-    this.stars = stars;
-  }
+    private universityStore: UniversitiesStore
+  ) {}
 
-  private searchStar$; 
+  public loadStarsSelect(query: string) {
+    this.starStore.setLoading(true);
 
-
-  public loadStarsSelect( query:string){
-      this.Starstore.setLoading(true);
-       
-      this.starsApi. 
-      getPageUniversity(query)
-        .pipe(
-          tap((result:any) => {
-            this.Starstore.upsertMany(result.data)
-          }),
-          tap(_ => this.Starstore.setLoading(false)),
-          tap(result => {
-           
-          })
-        ).subscribe();
-  }
-
-  public loadStars(query:string) {
-
-    this.Starstore.setLoading(true);
     this.starsApi
-      .getStarHttp(query)
+      .getPageUniversity(query)
       .pipe(
         tap((result: any) => {
-          console.log('Result',result);
-          this.Starstore.upsertMany(result)
+          this.starStore.upsertMany(result.data);
         }),
-        tap(_ => this.Starstore.setLoading(false))
-      ).subscribe();
+        tap(_ => this.starStore.setLoading(false)),
+        tap(result => {})
+      )
+      .subscribe();
+  }
+
+  public loadStars() {
+    this.starStore.setLoading(true);
+    this.starsApi
+      .getStarHttp()
+      .pipe(
+        tap((result: any) => {
+          this.starStore.upsertMany(result);
+        }),
+        tap(_ => this.starStore.setLoading(false)),
+        tap(() => {
+          this.applyFiltersToStarsList('', null);
+        })
+      )
+      .subscribe();
   }
 
   public getStars() {
-    this.starsApi.getStars()
-    .pipe(
-      tap(
-        result => {          
-          this.Starstore.set(result)
-        }
-      ),
-      tap(_ => this.Starstore.setLoading(false)),
-      catchError(error => {
-        console.log(error);
-        return null;
-      })
-    ).subscribe();
+    this.starsApi
+      .getStars()
+      .pipe(
+        tap(result => {
+          this.starStore.set(result);
+        }),
+        tap(_ => this.starStore.setLoading(false)),
+        catchError(error => {
+          console.log(error);
+          return null;
+        })
+      )
+      .subscribe();
   }
-
-
-
-
-
-
-
-
-
-
-
 
   getStar(index) {
     return this.stars[index];
@@ -127,5 +112,43 @@ export class StarService {
       result: totalList.slice(pageIndexStart, pageIndexEnd), //Los 6 elementos del arreglo
       hasReachedLimit: pageIndexEnd >= totalList.length - 1
     };
+  }
+
+  private _getPageAndSetStore(
+    targetPage: number,
+    query: string | { [fiter: string]: string }
+  ) {
+    const { pageIds } = this.starsQuery.getStarsListUI();
+    this.starsApi
+      .getPage(targetPage, 5, query)
+      .pipe(
+        tap(({ data, count }) => {
+          const newPagesIds = [
+            ...(targetPage === 1 ? [] : pageIds),
+            ...data.map(e => e.id)
+          ];
+          console.log(newPagesIds);
+          this.starStore.updateList({
+            currentPage: targetPage,
+            hasReachedLimit: newPagesIds.length === count,
+            pageIds: newPagesIds,
+            query
+          });
+        })
+      )
+      .subscribe();
+  }
+
+  showMoreInStarsList() {
+    const { currentPage, query } = this.starsQuery.getStarsListUI();
+    const targetPage = currentPage + 1;
+    this._getPageAndSetStore(targetPage, query);
+  }
+
+  applyFiltersToStarsList(name: string, universityId: any) {
+    this._getPageAndSetStore(1, {
+      nombre: name,
+      universidadId: universityId
+    });
   }
 }
