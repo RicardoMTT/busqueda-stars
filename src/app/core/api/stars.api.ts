@@ -43,7 +43,7 @@ export class StarsApi{
 
     public getStarHttp(nombre: any) {
       return this.http
-        .get(localUrl+'?nombre='+nombre)
+        .get(localUrl)
         .pipe(map(resp => resp));
     }
   
