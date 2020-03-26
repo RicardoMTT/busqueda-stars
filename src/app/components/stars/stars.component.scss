@@ -1,61 +1,22 @@
-
-@font-face {
-  font-family: lato-bold;
-  src: url(../../../assets/font/Lato-Bold.ttf) format("opentype");
-}
 .cards {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-  position: relative;
   justify-content: space-around;
 }
-.student__info {
-  width: 92%;
-  background: transparent linear-gradient(0deg, #000000 0%, #02020295 46%, #08080800 100%) 0% 0% no-repeat padding-box;
-  color:white;
-  position: absolute;
-  top: 84%;
-  opacity: 1;
-  text-align: center;
+ 
+.buscador{ 
+  display: flex;
+  position: relative;
+  width: 50%; 
+  margin-bottom: 10px;
 }
-
-
-.student__info__name {
-  position: absolute;
-  width: 100%;
-  bottom: 40%;
-  transform: translateY(50%);
-  transition: all .3s ease-in-out;
+.buscador-universidad{
+  display: flex;
+  position: relative;
+  margin-bottom: 10px;
 }
-
-.student__info__description {
-  padding: 10px;
-  opacity: 0;
-  transition: all .2s ease-in-out;
-}
-
-.student__info:hover .student__info__name {
-  bottom: 100%;
-  transform: translateY(0);
-}
-
-.student__info:hover .student__info__description {
-  opacity: 1;
-}
-
-
-
-.btnPaginacion{
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-   opacity: 1px;
-   border-radius: 4px;
-   box-shadow: 0px 1px 6px #00000016;
- }
- .ranking{
-  font-family: 'lato-bold';
-}
-.icon-search {
+.icon-search{
   position: absolute;
   height: 40px;
   width: auto;
@@ -63,42 +24,52 @@
   transform: translateY(-50%);
   padding: 2px 8px;
 }
-.inputClass {
-  text-align: center;
+
+
+.inputClass{
+  text-align: center; 
   width: 450px;
 }
-.container-titulo {
+
+.container-titulo{
   display: flex;
   flex-direction: row;
 }
+ 
+
 .titulo {
   width: 100%;
   height: 80px;
   text-align: center;
-  background: #fff;
+  background:#FFF;
   opacity: 1;
-  padding: 20px 20px;
+  padding:20px 20px;
 }
-.titulo h1 {
+
+.titulo h1{
   font-size: 50px;
-  color: #1a1a1a;
-  font-family: "Lato";  
-  font-weight: bold;
-  line-height: 40px;
+  color: #1A1A1A;
+  font-family: 'Lato';
 }
 .card {
-  width: 100%;
   text-align: center;
   margin: 10px;
 }
-img{
+
+.listado{
+  background: red;
+}
+
+.imgStarrr{
   width: 100%;
   height: auto;
   cursor: pointer;
 }
+
 button {
   width: 100%;
 }
+
 .centered {
   display: flex;
   flex-wrap: wrap;
@@ -106,6 +77,7 @@ button {
   align-items: center;
   flex-direction: row;
 }
+
 .contenido {
   margin-top: 10px;
   width: 100%;
@@ -117,16 +89,20 @@ button {
   display: flex;
   justify-content: center;
 }
+/*INPUT*/
 input {
   width: 100%;
   height: 50px;
 }
+
+/*ANIMACIONES*/
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
+
 .fadeInLeft {
   -webkit-animation-name: fadeInLeft;
   animation-name: fadeInLeft;
@@ -143,6 +119,7 @@ input {
     transform: translateZ(0);
   }
 }
+
 @keyframes fadeInLeft {
   0% {
     opacity: 0;
@@ -155,69 +132,91 @@ input {
     transform: translateZ(0);
   }
 }
+
+
 .example-header-image {
   border-radius: 100%;
   background-size: cover;
 }
-.flex-university {
+
+.flex-university{
   display: flex;
 }
-.flex-ranking {
+
+.flex-ranking{
   display: flex;
   justify-content: center;
 }
-.texto-encima {
+
+.texto-encima{
   position: absolute;
   top: 20px;
   left: 30px;
 }
-.contenedor {
+
+.contenedor{
   position: relative;
   text-align: center;
 }
-.texto-debajo {
+
+.texto-debajo{
   width: 100%;
-  background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0), #000);
+  background-image: linear-gradient(to bottom,rgba(255,0,0,0), rgb(0, 0, 0));
   position: absolute;
   top: 88%;
   left: 50%;
   padding: 0;
   transform: translate(-50%, -50%);
 }
-.texto-debajo:hover {
+.texto-debajo:hover{
   top: 60%;
-  transition: 0.5s ease-in-out;
+  transition: .5s ease-in-out;
+  .datos-secundarios{
+    top: 100%;
+    visibility: initial;
+  }
 }
-.texto-debajo:hover .datos-secundarios {
-  top: 100%;
-  visibility: initial;
-}
-.datos-secundarios {
+
+.datos-secundarios{
   visibility: hidden;
 }
-.datos-star {
-  color: white;
+
+
+
+
+
+
+
+.datos-star{
+  color:white;
   opacity: 1;
 }
-p {
-  font-family: "Lato", sans-serif;
+
+p{
+  font-family: 'Lato', sans-serif;
 }
-.filtro-container {
+
+
+.filtro-container{
   display: flex;
   justify-content: space-around;
   width: 100%;
 }
-.form-container select {
+
+.form-container select{ 
   width: 50%;
   margin-left: 40px;
 }
+
+
 .options {
   width: 300px;
   height: 50px;
   border: 1px solid #e5e5e5;
   margin-top: 10px;
 }
-.options select {
+
+.options  select {
   margin-top: 10px;
   height: 30px;
   font-size: 14px;
@@ -225,73 +224,113 @@ p {
   width: 100%;
   background: white;
 }
-.form-container {
+
+.form-container{
   width: 50%;
   height: 40px;
 }
+.buscador-container{
+  width: 50%;
+  padding: 10px 10px;
+  display: flex;
+  position: relative;
+  width: 50%; 
+  margin-bottom: 10px;
+}
+
+
+
 @media only screen and (max-width: 768px) {
-  .navegacion-container{
-    margin-top: 50px;
-  }
-  img {
+  .imgStarrr{
     width: 100%;
   }
-  .texto-debajo {
-    top: 83%;
+  .texto-debajo{
+    top:83%;
   }
-  .container-titulo {
+  .contenedorImg{
+    width: 10px;
+    height: 10px;
+  } 
+  .container-titulo{
     flex-direction: column;
-  }
-  .titulo {
+  } 
+  .titulo{
     width: 100%;
-    text-align: center;
+    text-align: center;  
     margin-bottom: 10px;
+  }
+  .buscador{
+    width: 100%;
   }
   .card {
     width: 100%;
   }
+
 }
+
+
 @media only screen and (min-width: 768px) {
-  .container-titulo {
+  .container-titulo{
     flex-direction: column;
   }
-  .titulo {
+  .titulo{
     width: 100%;
-    text-align: center;
+    text-align: center;  
     margin-bottom: 10px;
   }
-  
-  .filtro-container {
+  .buscador{
+    width: 100%;
+  }
+
+  .filtro-container{
     flex-direction: column;
+  }
+  .buscador-container,.form-container{
+    width: 100%;
+    text-align: center;
   }
   
   .card {
     width: 40%;
   }
 }
+
+
 @media only screen and (min-width: 1024px) {
-  .container-titulo {
+  .container-titulo{
     flex-direction: column;
   }
-  .titulo {
+  .titulo{
     width: 100%;
-    text-align: center;
+    text-align: center;  
     margin-bottom: 10px;
   }
-  
-  .filtro-container {
+  .buscador{
+    width: 100%;
+  }
+
+  .filtro-container{
     flex-direction: column;
+  }
+  .buscador-container,.form-container{
+    width: 100%;
+    text-align: center;
   }
   
   .card {
     width: 30%;
   }
 }
-.navegacion-container {
+
+
+/*LISTA*/
+
+.navegacion-container{
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: center; 
 }
-.nav-item {
+
+.nav-item{
   width: 50px;
 }

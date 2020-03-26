@@ -20,7 +20,6 @@ p {
 }
 
 .col1,.col2,.col3,.col4{
-  text-align: center;
   padding-top: 30px;
   width: 20%;
 }
@@ -48,6 +47,5 @@ p {
   }
   .col1,.col2,.col3,.col4{
     width: 100%;
-    text-align: center;
   }
 }

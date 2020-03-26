@@ -15,6 +15,28 @@ export class StarsApi {
     this.getStars();
   }
 
+   //Retorna la lista filtrada sino toda la lista
+   private getFilteredList(query: string | { [fiter: string]: string }) {
+    const stars = this.starsQuery.getAll();
+    if (typeof query === 'string') {
+      return stars.filter(p => p.nombre.includes(query));
+    } else {
+      let filteredList = stars;
+      if (query.nombre) {
+        filteredList = filteredList.filter(e =>
+          e.nombre.toLowerCase().includes(query.nombre.toLowerCase())
+        );
+      }
+      if (query.universidadId) {
+        filteredList = filteredList.filter(
+          e =>e.universidad._id === query.universidadId
+        );
+      }
+      return filteredList;
+    }
+  }
+
+
   public getStars() {
     return this.http
       .get(localUrl)
@@ -28,7 +50,8 @@ export class StarsApi {
                 be.apellido,
                 '',
                 be.universidad,
-                be.carrera
+                be.carrera,
+                be.ranking
               )
           )
         )
@@ -45,7 +68,6 @@ export class StarsApi {
 
   getPageUniversity(query: string | Map<string, string>) {
     const filteredList = this.getFilteredListUniversity(query);
-    console.log('universidades', filteredList);
 
     const startIndex = 0;
     const endIndex = 0;
@@ -57,47 +79,24 @@ export class StarsApi {
     );
   }
 
-  //Retorna la lista filtrada sino toda la lista
-  private getFilteredList(query: string | { [fiter: string]: string }) {
-    const stars = this.starsQuery.getAll();
-    if (typeof query === 'string') {
-      return stars.filter(p => p.nombre.includes(query));
-    } else {
-      let filteredList = stars;
-      console.log({ query, filteredList });
-      if (query.nombre) {
-        filteredList = filteredList.filter(e =>
-          e.nombre.toLowerCase().includes(query.nombre.toLowerCase())
-        );
-      }
-      if (query.universidadId) {
-        filteredList = filteredList.filter(
-          e => e.universidad.id === query.universidadId
-        );
-      }
-      return filteredList;
-    }
-  }
+ 
   getPage(
     page: number,
     pageSize: number,
     query: string | { [fiter: string]: string }
   ) {
+    
     const filteredList = this.getFilteredList(query);
     console.log(filteredList);
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
+    console.log(page);
+    
+    const startIndex = (page - 1) * pageSize;//6
+    const endIndex = startIndex + pageSize;//12
     return of({
       count: filteredList.length,
       data: filteredList.slice(startIndex, endIndex)
     });
   }
 
-  getSearch(
-    page: number,
-    pageSize: number,
-    query: string | { [fiter: string]: string }
-  ) {
-    const filteredList = this.getFilteredList(query);
-  }
+  
 }

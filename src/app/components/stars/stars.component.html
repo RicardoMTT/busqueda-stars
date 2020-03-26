@@ -7,7 +7,48 @@
   <div class="centered">
     <section class="cards">
       <mat-card class="card"  *ngFor="let star of starQuery.page$|async">
-        <div class="contenedor">
+        <div class="student__photo">
+          <img src="../assets/adan.png" alt="">
+          <div class="texto-encima">
+            <div class="contenedorImg">
+              <img src="../assets/star.svg" class="" alt="">
+              <p class="ranking" style="position: relative;color:black;margin-top: -50%;left: 50%;transform: translate(-50%, -50%)">
+                {{ star.ranking }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="student__info">
+          <div class="student__info__name" style="line-height: 10px;margin-bottom: 20px;">
+              <p style="opacity: 1;">{{ star.nombre }} {{ star.apellido}}</p>
+              <p>
+                {{ star.universidad.nombre }}
+              </p>
+            </div>
+          <p  class="student__info__description">
+            {{ star.carrera.nombre }}
+          </p>
+        </div>
+      </mat-card> 
+    </section>
+    </div>
+    
+
+
+     
+    
+    <div class="navegacion-container">
+      <div *ngFor="let valor of starQuery.pagination$ | async" class="nav-item">
+          <button (click)="showNextPage(valor)" class="btnPaginacion">
+            <label style="color: black;">{{valor}}</label>
+          </button>
+      </div>
+    </div>
+
+    
+<!--
+{{ starQuery.pagination$ | async | json }}
+<div class="contenedor">
           <img src="../assets/adan.png" class="imgStarrr"/>
           <div class="texto-encima">
             <div class="contenedorImg">
@@ -19,7 +60,7 @@
           </div>
           <div class="texto-debajo">
             <mat-card-title><p class="datos-star" >{{ star.nombre }} {{ star.apellido}}</p></mat-card-title>
-            <mat-card-subtitle>
+            <mat-card-subtitle class="datos-secundarios">
               <div class="datos-star">
                 <p>{{ star.universidad.nombre }}</p>
                 <p>{{ star.carrera.nombre }}</p>
@@ -27,26 +68,19 @@
             </mat-card-subtitle>  
           </div>
         </div>
-      </mat-card>
-    </section>
-    </div>
 
-    <div class="contenido" *ngIf="!esUniversidad">
+
+  <div class="contenido">
       <button (click)="showNextPage()" [ngStyle]="buttonStyle()" [disabled]="starQuery.starsDisabledMore$ | async">
         Ver mas
       </button>
     </div>
 
-
-
-
-<!--
-
     <div class="contenido" *ngIf="esUniversidad">
       <button (click)="showNextPageSelect()" [ngStyle]="buttonStyle()"
         [disabled]="starQuery.starsDisabledMore$ | async">Ver mas 
       </button>
-    </div>
+    </div> 
 
     <div class="navegacion-container">
       <ul class="navegacion">

@@ -7,7 +7,7 @@ export class Star {
   imagen?: string;
   carrera?: any;
   universidad?: any;
-  ranking?: number;
+  ranking?: string;
 
   public constructor(
     id: string,
@@ -15,7 +15,8 @@ export class Star {
     apellido: string,
     imagen: string,
     carrera: string,
-    universidad: string
+    universidad: string,
+    ranking:string
   ) {
     this.id = id;
     this.nombre = nombre;
@@ -23,5 +24,6 @@ export class Star {
     this.imagen = imagen;
     this.carrera = carrera;
     this.universidad = universidad;
+    this.ranking = ranking;
   }
 }

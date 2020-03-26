@@ -7,7 +7,6 @@ import { starsListAnimation } from './stars-list.animation';
 import { universities } from '../../mock/universities';
 import { StarsQuery } from 'src/app/core/stores/stars/stars.query';
 
-const PAGE_SIZE = 6;
 
 @Component({
   selector: 'app-stars',
@@ -19,10 +18,10 @@ export class StarsComponent implements OnInit {
   inicio: number = 0;
   stars: any[] = [];
   lleno: boolean = false;
-  esUniversidad: boolean = false;
   paginacionTotal: any[];
   universidades: any[] = universities;
 
+  
   form = new FormGroup({
     universidad: new FormControl(this.universidades[4])
   });
@@ -32,20 +31,45 @@ export class StarsComponent implements OnInit {
 
   constructor(
     private svcStar: StarService,
-    private router: Router,
     public dialog: MatDialog,
     public starQuery: StarsQuery
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.svcStar.loadStars();
+    this.svcStar.loadStarsAndApplyDefaultFilters();
   }
 
   //paged query
   currentPage = 1;
   pageSize = 6;
   hasReachedLimit = false;
-  getPageAndConcatToCurrentList(page: number) {
+
+
+  showNextPage(valor) {
+    console.log(valor);
+    
+    this.svcStar.goToPage(valor);
+  }
+
+  buttonStyle() {
+    var valor1;
+    this.starQuery.currentPage$.subscribe((valorrrr) => {
+      valor1 = valorrrr;
+    });
+    if (valor1 === 1) {
+      return {
+        background: 'black',
+        color: 'white'
+      }
+    }
+  }
+
+}
+
+/**
+ *
+ *
+ * getPageAndConcatToCurrentList(page: number) {
     this.stars = [];
     const pageResult = this.svcStar.getPageUniverisdad(
       page,
@@ -67,18 +91,4 @@ export class StarsComponent implements OnInit {
     this.hasReachedLimit = pageResult.hasReachedLimit;
     this.currentPage = page;
   }
-
-  showNextPage() {
-    // this.svcStar.loadStars(
-    //   this.starQuery.getStarsListUI().query,
-    // );
-  }
-
-  buttonStyle() {
-    return {
-      background: !this.hasReachedLimit
-        ? 'rgb(101, 243, 101)'
-        : 'rgb(247, 176, 162)'
-    };
-  }
-}
+ */

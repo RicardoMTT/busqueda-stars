@@ -21,8 +21,6 @@ export class NavComponent implements OnInit {
   universidades: any[] = universities;
 
   constructor(
-    private router: Router,
-    private svcStar: StarService,
     private fb: FormBuilder,
     public universityService: UniversityService,
     public universitiesQuery: UniversitiesQuery,
@@ -59,7 +57,7 @@ export class NavComponent implements OnInit {
         tap(val => {
           this._applyFilters();
         })
-      )
+      ) 
       .subscribe();
   }
 

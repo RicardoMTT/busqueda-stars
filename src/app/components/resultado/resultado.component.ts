@@ -15,10 +15,6 @@ export class ResultadoComponent implements OnInit {
   starArr:any[];
   termino:string;
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      this.termino = params['termino'];      
-      this.starArr = this.svcStar.buscarStar(this.termino);
-    });
     
   }
 
