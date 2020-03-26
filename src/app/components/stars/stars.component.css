@@ -7,23 +7,31 @@
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-  position: relative;
   justify-content: space-around;
 }
+
+.card-container{
+  position: relative;
+  overflow: hidden;
+}
+.card {
+  width: 100%;
+  text-align: center;
+  margin: 10px;
+}
 .student__info {
-  width: 92%;
+  width: 100%;
   background: transparent linear-gradient(0deg, #000000 0%, #02020295 46%, #08080800 100%) 0% 0% no-repeat padding-box;
   color:white;
   position: absolute;
-  top: 84%;
+  bottom: 0;
   opacity: 1;
   text-align: center;
 }
-
-
 .student__info__name {
   position: absolute;
   width: 100%;
+  height: 80px;
   bottom: 40%;
   transform: translateY(50%);
   transition: all .3s ease-in-out;
@@ -44,7 +52,10 @@
   opacity: 1;
 }
 
-
+.student__photo img{
+  width: 100%;
+  height: auto;
+}
 
 .btnPaginacion{
   background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -55,21 +66,13 @@
  .ranking{
   font-family: 'lato-bold';
 }
-.icon-search {
-  position: absolute;
-  height: 40px;
-  width: auto;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 2px 8px;
-}
 .inputClass {
   text-align: center;
   width: 450px;
 }
 .container-titulo {
   display: flex;
-  flex-direction: row;
+  margin-bottom: 30px;
 }
 .titulo {
   width: 100%;
@@ -86,11 +89,6 @@
   font-weight: bold;
   line-height: 40px;
 }
-.card {
-  width: 100%;
-  text-align: center;
-  margin: 10px;
-}
 img{
   width: 100%;
   height: auto;
@@ -105,10 +103,6 @@ button {
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
-}
-.contenido {
-  margin-top: 10px;
-  width: 100%;
 }
 button {
   width: 100%;
@@ -155,61 +149,14 @@ input {
     transform: translateZ(0);
   }
 }
-.example-header-image {
-  border-radius: 100%;
-  background-size: cover;
-}
-.flex-university {
-  display: flex;
-}
-.flex-ranking {
-  display: flex;
-  justify-content: center;
-}
 .texto-encima {
   position: absolute;
-  top: 20px;
-  left: 30px;
+  top: 10px;
+  left: 10px;
 }
-.contenedor {
-  position: relative;
-  text-align: center;
-}
-.texto-debajo {
-  width: 100%;
-  background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0), #000);
-  position: absolute;
-  top: 88%;
-  left: 50%;
-  padding: 0;
-  transform: translate(-50%, -50%);
-}
-.texto-debajo:hover {
-  top: 60%;
-  transition: 0.5s ease-in-out;
-}
-.texto-debajo:hover .datos-secundarios {
-  top: 100%;
-  visibility: initial;
-}
-.datos-secundarios {
-  visibility: hidden;
-}
-.datos-star {
-  color: white;
-  opacity: 1;
-}
+
 p {
   font-family: "Lato", sans-serif;
-}
-.filtro-container {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-}
-.form-container select {
-  width: 50%;
-  margin-left: 40px;
 }
 .options {
   width: 300px;
@@ -225,19 +172,13 @@ p {
   width: 100%;
   background: white;
 }
-.form-container {
-  width: 50%;
-  height: 40px;
-}
-@media only screen and (max-width: 768px) {
+
+@media only screen and (max-width: 600px) {
   .navegacion-container{
     margin-top: 50px;
   }
   img {
     width: 100%;
-  }
-  .texto-debajo {
-    top: 83%;
   }
   .container-titulo {
     flex-direction: column;
@@ -251,6 +192,21 @@ p {
     width: 100%;
   }
 }
+
+
+@media only screen and (min-width: 600px) {
+  .card{
+    width: 40%;
+  }
+  .student__info{
+    width: 100%;
+    top: 73%;
+  }
+  .student__info__name{
+    bottom: 10%;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   .container-titulo {
     flex-direction: column;
@@ -261,12 +217,16 @@ p {
     margin-bottom: 10px;
   }
   
-  .filtro-container {
-    flex-direction: column;
-  }
-  
   .card {
     width: 40%;
+  }
+  .student__info{
+    width: 100%;
+    top: 84%;
+  }
+  
+  .student__info__name{
+    bottom: 40%;
   }
 }
 @media only screen and (min-width: 1024px) {
@@ -277,10 +237,6 @@ p {
     width: 100%;
     text-align: center;
     margin-bottom: 10px;
-  }
-  
-  .filtro-container {
-    flex-direction: column;
   }
   
   .card {

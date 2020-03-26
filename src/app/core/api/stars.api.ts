@@ -87,9 +87,7 @@ export class StarsApi {
   ) {
     
     const filteredList = this.getFilteredList(query);
-    console.log(filteredList);
-    console.log(page);
-    
+
     const startIndex = (page - 1) * pageSize;//6
     const endIndex = startIndex + pageSize;//12
     return of({

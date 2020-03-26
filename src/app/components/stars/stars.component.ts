@@ -46,8 +46,6 @@ export class StarsComponent implements OnInit {
 
 
   showNextPage(valor) {
-    console.log(valor);
-    
     this.svcStar.goToPage(valor);
   }
 

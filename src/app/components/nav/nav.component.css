@@ -48,26 +48,26 @@ body {
 .form-container{
   width: 50%;
 }
+
+
 .formClass{
   width: 80%;
   height: 40px;
   font-size: 12px;
   color: dimgrey;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-  box-shadow: #00000016;
-  border-radius: 4px;
+  background: #FAFAFA 0% 0% no-repeat padding-box;
+  box-shadow: 0px 1px 3px #00000017;
   opacity: 1;
   border-color: transparent;
 }
 /*Input*/
-
 .inputClass{
   width:90%;
   height: 40px;
   text-align: center; 
   color: dimgray;
   background: #FFFFFF 0% 0% no-repeat padding-box;
-  box-shadow: #00000016;
+  box-shadow: 0px 1px 3px #00000016;
   border-radius: 4px;
   opacity: 1;
   border-color: transparent;

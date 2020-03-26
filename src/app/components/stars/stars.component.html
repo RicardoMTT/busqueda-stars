@@ -7,36 +7,39 @@
   <div class="centered">
     <section class="cards">
       <mat-card class="card"  *ngFor="let star of starQuery.page$|async">
-        <div class="student__photo">
-          <img src="../assets/adan.png" alt="">
-          <div class="texto-encima">
-            <div class="contenedorImg">
-              <img src="../assets/star.svg" class="" alt="">
-              <p class="ranking" style="position: relative;color:black;margin-top: -50%;left: 50%;transform: translate(-50%, -50%)">
-                {{ star.ranking }}
-              </p>
+        <div class="card-container">
+
+          <div class="student__photo">
+            <img src="../assets/adan.png" alt="">
+            <div class="texto-encima">
+              <div class="contenedorImg">
+                <img src="../assets/star.svg" class="" alt="">
+                <p class="ranking" style="position: relative;color:black;margin-top: -50%;left: 50%;transform: translate(-50%, -50%)">
+                  {{ star.ranking }}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="student__info">
-          <div class="student__info__name" style="line-height: 10px;margin-bottom: 20px;">
-              <p style="opacity: 1;">{{ star.nombre }} {{ star.apellido}}</p>
-              <p>
-                {{ star.universidad.nombre }}
-              </p>
+
+          <div class="student__info">
+            <div class="student__info__name">
+                <p style="opacity: 1;">{{ star.nombre }} {{ star.apellido}}</p>
+                <p>
+                  {{ star.universidad.nombre }}
+                </p>
             </div>
-          <p  class="student__info__description">
-            {{ star.carrera.nombre }}
-          </p>
+            <p  class="student__info__description">
+              {{ star.carrera.nombre }}
+            </p>
+          </div>
+
         </div>
+
       </mat-card> 
     </section>
     </div>
     
 
-
-     
-    
     <div class="navegacion-container">
       <div *ngFor="let valor of starQuery.pagination$ | async" class="nav-item">
           <button (click)="showNextPage(valor)" class="btnPaginacion">
@@ -44,74 +47,3 @@
           </button>
       </div>
     </div>
-
-    
-<!--
-{{ starQuery.pagination$ | async | json }}
-<div class="contenedor">
-          <img src="../assets/adan.png" class="imgStarrr"/>
-          <div class="texto-encima">
-            <div class="contenedorImg">
-              <img src="../assets/star.svg" class="" alt="">
-              <p style="position: relative;color:rgb(255, 255, 255);margin-top: -25px;left: 50%;transform: translate(-50%, -50%)">
-                {{ star.ranking }}
-              </p>
-            </div>
-          </div>
-          <div class="texto-debajo">
-            <mat-card-title><p class="datos-star" >{{ star.nombre }} {{ star.apellido}}</p></mat-card-title>
-            <mat-card-subtitle class="datos-secundarios">
-              <div class="datos-star">
-                <p>{{ star.universidad.nombre }}</p>
-                <p>{{ star.carrera.nombre }}</p>
-              </div>
-            </mat-card-subtitle>  
-          </div>
-        </div>
-
-
-  <div class="contenido">
-      <button (click)="showNextPage()" [ngStyle]="buttonStyle()" [disabled]="starQuery.starsDisabledMore$ | async">
-        Ver mas
-      </button>
-    </div>
-
-    <div class="contenido" *ngIf="esUniversidad">
-      <button (click)="showNextPageSelect()" [ngStyle]="buttonStyle()"
-        [disabled]="starQuery.starsDisabledMore$ | async">Ver mas 
-      </button>
-    </div> 
-
-    <div class="navegacion-container">
-      <ul class="navegacion">
-        <li *ngFor="let val of paginacionTotal;let i=index" (click)="showNextPage()">
-          {{ i+1 }}
-        </li>
-      </ul>
-    </div>
--->
-
-
- 
-<!--
-<div class="filtro-container">
-
-  <div class="buscador-container">
-    <img src="../../../assets/search.png" class="icon-search" alt="logo">
-    <input class="form-control" class="inputClass" type="text" placeholder="Buscar Estrella" [formControl]="searchFC">
-  </div>
-
-  <div class="form-container" class="options">
-    <form [formGroup]="form">
-      <select formControlName="universidad">
-        <option [ngValue]="null" disabled>Seleccione universidad</option>
-        <option *ngFor="let uni of universidades;let index=index" [ngValue]="uni.nombre">
-          {{uni.nombre}}
-        </option>
-      </select>
-    </form>
-  </div>
-
-</div>
-
--->

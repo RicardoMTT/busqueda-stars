@@ -40,7 +40,6 @@ export class StarService {
       .getStarHttp() 
       .pipe(
         tap((result: any) => {
-          console.log(result);
           this.starStore.upsertMany(result);
         }),
         tap(_ => this.starStore.setLoading(false)),
@@ -57,12 +56,8 @@ export class StarService {
       universidadId: universityId
     });
   }
-  public goToPage(pageNumber: number){
-    console.log(pageNumber);
-    
+  public goToPage(pageNumber: number){    
     const { query } = this.starsQuery.getStarsListUI();
-    console.log(query);
-    
     this._getPageAndSetStore(pageNumber,query);
   }
   
@@ -70,17 +65,13 @@ export class StarService {
     targetPage: number,
     query: string | { [fiter: string]: string }
   ) {
-    const { pageIds } = this.starsQuery.getStarsListUI(); 
-    console.log(targetPage);
-    
+    const { pageIds } = this.starsQuery.getStarsListUI();     
     this.starsApi 
       .getPage(targetPage, 6, query)   
       .pipe(
         tap(({ data, count }) => {
            const newPagesIds = data.map(e => e.id);           
-           const pageNumbers = Math.ceil(newPagesIds.length/6);           
-           console.log(pageNumbers);
-           
+           const pageNumbers = Math.ceil(newPagesIds.length/6);                      
           /** 
            const newPagesIds = [
             ...(targetPage === 1 ? [] : pageIds),
