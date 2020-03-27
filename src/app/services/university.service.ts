@@ -20,14 +20,14 @@ import { UniversityApi } from '../core/api/universities.api';
    
   
     public loadUniversities(){    
-      
+      this.universityStore.setLoading(true);
       this.universityApi.getUniversity()
-    .pipe(
-      tap(
+      .pipe(
+         tap(
         result => {          
           this.universityStore.set(result)
         }
-      ),
+       ),
       tap(_ => this.universityStore.setLoading(false))
     ).subscribe();
     }

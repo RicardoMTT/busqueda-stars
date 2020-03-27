@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime, tap } from 'rxjs/operators';
 import { StarService } from 'src/app/services/star.service';
 import { universities } from 'src/app/mock/universities';
@@ -15,8 +14,6 @@ const PAG_SIZE = 6;
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  stars: any[] = [];
-  ocultar: boolean = true;
   searchFG: FormGroup;
   universidades: any[] = universities;
 
@@ -70,7 +67,5 @@ export class NavComponent implements OnInit {
     );
   }
 
-  cambiarEstado() {
-    this.ocultar = !this.ocultar;
-  }
+ 
 }

@@ -16,28 +16,22 @@ export class StarsQuery extends QueryEntity<Starstate> {
   page$ = this.select(state => state.ui.starsList.pageIds).pipe(
     switchMap(ids => this.selectMany(ids))
   );
-  
+
   pagination$ = this.select(state => state.ui.starsList.pagesNumbers)
-                .pipe(
-                  map(valor => {                    
-                    return Array(valor).fill(1).map((_,index)=>index+1)
-                  })
-                );
- 
+    .pipe(
+      map(valor => {
+        return Array(valor).fill(1).map((_, index) => index + 1)
+      })
+    );
+
   currentPage$ = this.select(state => state.ui.starsList.currentPage)
-                  .pipe(
-                    map(valor=>{
-                      return valor;
-                    })
-                  );
-                    
- 
-  
- 
- 
- 
- 
- 
+    .pipe(
+      map(valor => {
+        return valor;
+      })
+    );
+
+
   getStarsListUI() {
     return this.getValue().ui.starsList;
   }
@@ -45,11 +39,5 @@ export class StarsQuery extends QueryEntity<Starstate> {
   constructor(protected store: StarsStore) {
     super(store);
   }
-  
-}
 
-/*
-        Una query es una clase que ofrece la funcionalidad 
-        de consultar la store, la store representa a nuestra bd.
-        Casi todos los metodos de query devolveran un OBSERVABLE
-    */
+}
