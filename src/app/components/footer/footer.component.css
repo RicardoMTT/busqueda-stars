@@ -1,51 +1,70 @@
-
 @font-face {
   font-family: lato-regular;
-  src: url(../../../assets/font/Lato-Regular.ttf) format("opentype");
+  src: url(../../../assets/font/Lato-Regular.ttf) format('opentype');
 }
 
-.footer-container{
+h2,
+p,
+label {
+  font-family: 'lato-regular', 'arial', sans-serif;
+  font-size: 10px;
+}
+
+.footer-container {
   background: #212121;
   padding: 20px 20px;
-  color: #FFF;
+  color: #fff;
   display: flex;
   width: 100%;
   justify-content: space-between;
 }
-.footer-container h2{
-  font: lato;
-}
 p {
   margin-top: 20px;
 }
-
-.col1,.col2,.col3,.col4{
+.col2,
+.col3 {
+  font-size: 14px;
+}
+.col1,
+.col2,
+.col3,
+.col4 {
   padding-top: 30px;
   width: 20%;
 }
-@media only screen and(max-width:500px ){
-  .footer-container{
+.col4 img {
+  margin-top: 10%;
+}
+@media only screen and(max-width:500px ) {
+  .footer-container {
     flex-direction: column;
   }
-  .col1,.col2,.col3,.col4{
-    width: 100%;  
+  .col1,
+  .col2,
+  .col3,
+  .col4 {
+    width: 100%;
   }
 }
 
-@media only screen and(max-width:350px ){
-  .footer-container{
+@media only screen and(max-width:350px ) {
+  .footer-container {
     flex-direction: column;
   }
-  .col1,.col2,.col3.col4{
-    width: 100%;  
+  .col1,
+  .col2,
+  .col3.col4 {
+    width: 100%;
   }
-
 }
 @media only screen and (max-width: 600px) {
-  .footer-container{
+  .footer-container {
     flex-direction: column;
   }
-  .col1,.col2,.col3,.col4{
+  .col1,
+  .col2,
+  .col3,
+  .col4 {
     width: 100%;
   }
 }

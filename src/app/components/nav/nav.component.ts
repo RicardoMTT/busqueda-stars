@@ -54,7 +54,7 @@ export class NavComponent implements OnInit {
         tap(val => {
           this._applyFilters();
         })
-      ) 
+      )
       .subscribe();
   }
 
@@ -66,6 +66,4 @@ export class NavComponent implements OnInit {
       universidad ? universidad.id : null
     );
   }
-
- 
 }

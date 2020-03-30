@@ -1,27 +1,42 @@
-
 @font-face {
   font-family: lato-bold;
-  src: url(../../../assets/font/Lato-Bold.ttf) format("opentype");
+  src: url(../../../assets/font/Lato-Bold.ttf) format('opentype');
 }
-.animated { 
-  -webkit-animation-duración: 1s; 
+.animated {
+  -webkit-animation-duración: 1s;
   animación-duración: 1s;
   -webkit-animation-fill-mode: both;
-  animation-fill-mode: both
+  animation-fill-mode: both;
 }
 
-@-webkit-keyframes fadeInUp{
-  0%{opacity:0;-webkit-transform:translate3d(0,100%,0);
-    transform:translate3d(0,100%,0)
-  }to{opacity:1;
-    -webkit-transform:translateZ(0);
-    transform:translateZ(0)
-  }}@keyframes fadeInUp{
-    0%{opacity:0;-webkit-transform:translate3d(0,100%,0);
-      transform:translate3d(0,100%,0)}to{opacity:1;
-      -webkit-transform:translateZ(0);
-      transform:translateZ(0)}}.fadeInUp{-webkit-animation-name:fadeInUp;animation-name:fadeInUp
+@-webkit-keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
   }
+  to {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
 .cards {
   display: flex;
   width: 100%;
@@ -29,7 +44,7 @@
   justify-content: space-around;
 }
 
-.card-container{
+.card-container {
   position: relative;
   overflow: hidden;
 }
@@ -40,8 +55,10 @@
 }
 .student__info {
   width: 100%;
-  background: transparent linear-gradient(0deg, #000000 0%, #02020295 46%, #08080800 100%) 0% 0% no-repeat padding-box;
-  color:white;
+  background: transparent
+    linear-gradient(0deg, #000000 0%, #02020295 46%, #08080800 100%) 0% 0%
+    no-repeat padding-box;
+  color: white;
   position: absolute;
   bottom: 0;
   opacity: 1;
@@ -53,13 +70,13 @@
   height: 80px;
   bottom: 40%;
   transform: translateY(50%);
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .student__info__description {
   padding: 10px;
   opacity: 0;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .student__info:hover .student__info__name {
@@ -71,18 +88,18 @@
   opacity: 1;
 }
 
-.student__photo img{
+.student__photo img {
   width: 100%;
   height: auto;
 }
 
-.btnPaginacion{
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-   opacity: 1px;
-   border-radius: 4px;
-   box-shadow: 0px 1px 6px #00000016;
- }
- .ranking{
+.btnPaginacion {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  opacity: 1px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 6px #00000016;
+}
+.ranking {
   font-family: 'lato-bold';
 }
 .inputClass {
@@ -91,7 +108,6 @@
 }
 .container-titulo {
   display: flex;
-  margin-bottom: 30px;
 }
 .titulo {
   width: 100%;
@@ -102,13 +118,14 @@
   padding: 20px 20px;
 }
 .titulo h1 {
-  font-size: 50px;
+  font-size: 45px;
+  letter-spacing: 0;
   color: #1a1a1a;
-  font-family: "Lato";  
-  font-weight: bold;
+  font-family: 'lato-bold', 'arial', sans-serif;
   line-height: 40px;
+  opacity: 1;
 }
-img{
+img {
   width: 100%;
   height: auto;
   cursor: pointer;
@@ -151,7 +168,7 @@ input {
 }
 
 p {
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 .options {
   width: 300px;
@@ -169,7 +186,7 @@ p {
 }
 
 @media only screen and (max-width: 600px) {
-  .navegacion-container{
+  .navegacion-container {
     margin-top: 50px;
   }
   img {
@@ -188,16 +205,15 @@ p {
   }
 }
 
-
 @media only screen and (min-width: 600px) {
-  .card{
+  .card {
     width: 40%;
   }
-  .student__info{
+  .student__info {
     width: 100%;
     top: 73%;
   }
-  .student__info__name{
+  .student__info__name {
     bottom: 10%;
   }
 }
@@ -211,16 +227,16 @@ p {
     text-align: center;
     margin-bottom: 10px;
   }
-  
+
   .card {
     width: 40%;
   }
-  .student__info{
+  .student__info {
     width: 100%;
     top: 84%;
   }
-  
-  .student__info__name{
+
+  .student__info__name {
     bottom: 40%;
   }
 }
@@ -233,7 +249,7 @@ p {
     text-align: center;
     margin-bottom: 10px;
   }
-  
+
   .card {
     width: 30%;
   }
@@ -242,6 +258,8 @@ p {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 .nav-item {
   width: 50px;

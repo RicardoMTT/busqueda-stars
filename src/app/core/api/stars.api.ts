@@ -15,8 +15,8 @@ export class StarsApi {
     this.getStars();
   }
 
-   //Retorna la lista filtrada sino toda la lista
-   private getFilteredList(query: string | { [fiter: string]: string }) {
+  //Retorna la lista filtrada sino toda la lista
+  private getFilteredList(query: string | { [fiter: string]: string }) {
     const stars = this.starsQuery.getAll();
     if (typeof query === 'string') {
       return stars.filter(p => p.nombre.includes(query));
@@ -29,13 +29,12 @@ export class StarsApi {
       }
       if (query.universidadId) {
         filteredList = filteredList.filter(
-          e =>e.universidad._id === query.universidadId
+          e => e.universidad._id === query.universidadId
         );
       }
       return filteredList;
     }
   }
-
 
   public getStars() {
     return this.http
@@ -79,22 +78,18 @@ export class StarsApi {
     );
   }
 
- 
   getPage(
     page: number,
     pageSize: number,
     query: string | { [fiter: string]: string }
   ) {
-    
     const filteredList = this.getFilteredList(query);
 
-    const startIndex = (page - 1) * pageSize;//6
-    const endIndex = startIndex + pageSize;//12
+    const startIndex = (page - 1) * pageSize; //6
+    const endIndex = startIndex + pageSize; //12
     return of({
       count: filteredList.length,
       data: filteredList.slice(startIndex, endIndex)
     });
   }
-
-  
 }
