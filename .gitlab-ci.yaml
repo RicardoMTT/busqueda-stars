@@ -1,0 +1,33 @@
+image: node:latest
+
+stages:
+  - build
+  - test
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+before_script:
+  - apt-get update -qq && apt-get install -y -qq sshpass && apt-get install -y -qq rsync
+
+install_dependencies:
+  stage: build
+  only:
+    - master
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
+
+deploy_to_digital:
+  stage: deploy
+  only:
+    - master
+  script:
+    - npm run build -- --prod
+    - cd dist/busqueda/browser
+    - export SSHPASS=$DEPLOY_SERVER_PWD
+    - sshpass -e rsync -e "ssh -o StrictHostKeyChecking=no" --recursive --times --compress --delete ./ ubuntu@161.35.5.244:/home/ubuntu/apps/
