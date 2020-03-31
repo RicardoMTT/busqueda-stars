@@ -25,6 +25,7 @@ export class StarService {
       .getStarHttp()
       .pipe(
         tap((result: any) => {
+          console.log(result);
           this.starStore.upsertMany(result);
         }),
         tap(_ => this.starStore.setLoading(false)),
@@ -56,7 +57,11 @@ export class StarService {
       .pipe(
         tap(({ data, count }) => {
           const newPagesIds = data.map(e => e.id);
-          const pageNumbers = Math.ceil(newPagesIds.length / 6);
+          console.log(newPagesIds.length);
+
+          const pageNumbers = Math.ceil(count / 6);
+          console.log(pageNumbers);
+
           /** 
            const newPagesIds = [
             ...(targetPage === 1 ? [] : pageIds),

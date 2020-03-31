@@ -9,7 +9,7 @@
     <mat-card class="card" *ngFor="let star of starQuery.page$ | async">
       <div class="card-container">
         <div class="student__photo">
-          <img [src]="star.imagen" alt="" />
+          <img src="../../../assets/adan.png" alt="" />
           <div class="texto-encima">
             <div class="contenedorImg">
               <img src="../assets/star.svg" class="" alt="" />
@@ -25,14 +25,30 @@
 
         <div class="student__info">
           <div class="student__info__name">
+            <div
+              style="display: flex;justify-content: center;margin-bottom: 10px;margin-top: 20px;align-items: center;"
+              class="icon-social"
+            >
+              <img
+                src="../../../assets/facebook.svg"
+                style="width: 15px;height: 15px;"
+                class="icon-social"
+              />
+              <img
+                src="../../../assets/linkedin.svg"
+                style="width: 15px;height: 15px;margin-left: 10px;margin-right: 10px;"
+                class="icon-social"
+              />
+              <img
+                src="../../../assets/download.svg"
+                style="width: 15px;height: 15px;"
+                class="icon-social"
+              />
+            </div>
             <p style="opacity: 1;">{{ star.nombre }} {{ star.apellido }}</p>
-            <p>
-              {{ star.universidad.nombre }}
-            </p>
+            <p></p>
           </div>
-          <p class="student__info__description">
-            {{ star.carrera.nombre }}
-          </p>
+          <p class="student__info__description"></p>
         </div>
       </div>
     </mat-card>

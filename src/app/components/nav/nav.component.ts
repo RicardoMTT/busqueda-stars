@@ -29,6 +29,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     this.universityService.loadUniversities();
+    console.log(this.universitiesQuery.getAll());
   }
 
   private _buildForm() {
