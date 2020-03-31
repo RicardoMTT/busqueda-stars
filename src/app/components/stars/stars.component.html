@@ -1,49 +1,50 @@
 <div class="container-titulo">
   <div class="titulo">
     <h1 class="animated fadeInUp">Nuestros certificados</h1>
-  </div> 
+  </div>
 </div>
 
-  <div class="centered">
-    <section class="cards">
-      <mat-card class="card"  *ngFor="let star of starQuery.page$|async">
-        <div class="card-container">
-
-          <div class="student__photo">
-            <img src="../assets/adan.png" alt="">
-            <div class="texto-encima">
-              <div class="contenedorImg">
-                <img src="../assets/star.svg" class="" alt="">
-                <p class="ranking" style="position: relative;color:black;margin-top: -50%;left: 50%;transform: translate(-50%, -50%)">
-                  {{ star.ranking }}
-                </p>
-              </div>
+<div class="centered">
+  <section class="cards">
+    <mat-card class="card" *ngFor="let star of starQuery.page$ | async">
+      <div class="card-container">
+        <div class="student__photo">
+          <img [src]="star.imagen" alt="" />
+          <div class="texto-encima">
+            <div class="contenedorImg">
+              <img src="../assets/star.svg" class="" alt="" />
+              <p
+                class="ranking"
+                style="position: relative;color:black;margin-top: -50%;left: 50%;transform: translate(-50%, -50%)"
+              >
+                {{ star.ranking }}
+              </p>
             </div>
           </div>
-
-          <div class="student__info">
-            <div class="student__info__name">
-                <p style="opacity: 1;">{{ star.nombre }} {{ star.apellido}}</p>
-                <p>
-                  {{ star.universidad.nombre }}
-                </p>
-            </div>
-            <p  class="student__info__description">
-              {{ star.carrera.nombre }}
-            </p>
-          </div>
-
         </div>
 
-      </mat-card> 
-    </section>
-    </div>
-    
-
-    <div class="navegacion-container">
-      <div *ngFor="let valor of starQuery.pagination$ | async" class="nav-item">
-          <button (click)="showNextPage(valor)" class="btnPaginacion">
-            <label style="color: black;">{{valor}}</label>
-          </button>
+        <div class="student__info">
+          <div class="student__info__name">
+            <p style="opacity: 1;">{{ star.nombre }} {{ star.apellido }}</p>
+            <p>
+              {{ star.universidad.nombre }}
+            </p>
+          </div>
+          <p class="student__info__description">
+            {{ star.carrera.nombre }}
+          </p>
+        </div>
       </div>
-    </div>
+    </mat-card>
+  </section>
+</div>
+
+<div class="navegacion-container">
+  <div *ngFor="let valor of starQuery.pagination$ | async" class="nav-item">
+    <button (click)="showNextPage(valor)" class="btnPaginacion">
+      <label style="color: black;">{{ valor }}</label>
+    </button>
+  </div>
+</div>
+
+{{ starQuery.page$ | async | json }}

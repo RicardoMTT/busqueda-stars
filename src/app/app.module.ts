@@ -27,7 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     APP_ROUTING,
     CommonModule,
     ReactiveFormsModule,
